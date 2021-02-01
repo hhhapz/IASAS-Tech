@@ -1,2 +1,2 @@
 language = "nodejs"
-run = "yarn && yarn start"
+run = "npm run start"

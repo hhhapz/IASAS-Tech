@@ -14,7 +14,7 @@ function WordEffect({ word, greekWord, index, changeIndex }) {
                     opacity: [0, 1],
                     easing: "easeOutCirc",
                     duration: 1000,
-                    delay: () => 100
+                    delay: () => 200
                 })
         }, 3000 + 50 * changeIndex);
     }, [setCurrent, word, index])

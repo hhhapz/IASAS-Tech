@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import WordEffect from './WordEffect'
+import anime from "animejs"
 
 function TextEffect({ text, contText }) {
   const words = text.split(" ")
@@ -12,16 +13,31 @@ function TextEffect({ text, contText }) {
         index: i
       }
     })
+
   const changeIndexes = shuffle([...words]).map(({ index }) => index)
 
+  useEffect(() => {
+    anime.timeline({ loop: false })
+      .add({
+        targets: `#contText`,
+        scale: [14, 1],
+        opacity: [0, 1],
+        easing: "easeOutCirc",
+        duration: 1500,
+        delay: () => 6000 + 50 * changeIndexes.length
+      })
+  }, [])
+
   return <div className="flex flex-col justify-between items-center w-8/12 h-3/5">
-    <div className="flex flex-wrap justify-center w-full font-greek text-2xl 3xl:text-4xl">
+    <div className="flex flex-wrap justify-center w-full font-greek xl:text-xl 2xl:text-2xl 3xl:text-4xl">
 
       {words.map(({ type, latin, greek, index }) => {
         return <WordEffect word={latin} greekWord={greek} index={index} changeIndex={changeIndexes[index]}></WordEffect>
       })}
     </div>
-    <div className="text-center text-3xl font-cursive">{contText}</div>
+    <div className="flex justify-center w-full text-3xl 3xl:text-5xl font-greek">
+      <span id="contText">{contText}</span>
+    </div>
   </div>
 
 }

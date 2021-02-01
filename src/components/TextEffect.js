@@ -14,8 +14,8 @@ function TextEffect({ text, contText }) {
     })
   const changeIndexes = shuffle([...words]).map(({ index }) => index)
 
-  return <div className="flex flex-col justify-between w-8/12 h-3/5">
-    <div className="flex flex-wrap w-full font-greek text-2xl">
+  return <div className="flex flex-col justify-between items-center w-8/12 h-3/5">
+    <div className="flex flex-wrap justify-center w-full font-greek text-2xl 3xl:text-4xl">
 
       {words.map(({ type, latin, greek, index }) => {
         return <WordEffect word={latin} greekWord={greek} index={index} changeIndex={changeIndexes[index]}></WordEffect>

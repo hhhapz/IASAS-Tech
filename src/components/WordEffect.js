@@ -13,7 +13,7 @@ function WordEffect({ word, greekWord, index, changeIndex }) {
                     scale: [14, 1],
                     opacity: [0, 1],
                     easing: "easeOutCirc",
-                    duration: 600,
+                    duration: 1000,
                     delay: () => 100
                 })
         }, 3000 + 50 * changeIndex);

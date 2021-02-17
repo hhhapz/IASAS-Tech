@@ -49,7 +49,7 @@ function Player({ pTransition, pVariants, ids }) {
 
         setTimeout(() => {
         }, INITIAL)
-    }, [])
+    }, [history, ids, type])
 
     const onReportReady = (data) => {
         setData(data)

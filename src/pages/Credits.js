@@ -1,8 +1,6 @@
 import { motion } from 'framer-motion';
-import { React, useState, useEffect } from 'react'
+import { React, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import frame from '../assets/images/homepage/frame.webp'
-import { toast } from 'react-toastify'
 
 function Credits({ pTransition, pVariants }) {
     const history = useHistory()

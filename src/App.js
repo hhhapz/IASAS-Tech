@@ -7,6 +7,11 @@ import Homepage from './pages/Homepage'
 import TheMap from './pages/Map';
 import Report from './pages/Report';
 
+const IDS = {
+  first: "JBDISrTRDOk",
+  last: "dQw4w9WgXcQ"
+}
+
 function App() {
   const location = useLocation()
   const pTransition = {
@@ -28,8 +33,11 @@ function App() {
           <Route path="/map" exact >
             <TheMap pTransition={pTransition} pVariants={pVariants} />
           </Route>
-          <Route path="/report" exact >
-            <Report pTransition={pTransition} pVariants={pVariants} />
+          <Route path="/report/first" exact >
+            <Report pTransition={pTransition} pVariants={pVariants} id={IDS.first} back="/" next="/map" />
+          </Route>
+          <Route path="/report/last" exact >
+            <Report pTransition={pTransition} pVariants={pVariants} id={IDS.last} back="/map" next="/credits" />
           </Route>
           <Route path="/" exact >
             <Homepage pTransition={pTransition} pVariants={pVariants} />

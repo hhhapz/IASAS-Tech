@@ -75,6 +75,11 @@ function TheMap({ pTransition, pVariants }) {
     const goBack = () => {
         history.push("/report")
     }
+    const goNext = () => {
+        console.log("push");
+        history.push("/report/last")
+    }
+
 
     const determineClasses = (name) => {
         return `absolute ${name} ${charData[name].classes}`
@@ -82,8 +87,7 @@ function TheMap({ pTransition, pVariants }) {
 
     const onEnter = (name) => () => {
         const newData = { ...charData }
-        if (name === "athena") newData[name].type = "both"
-        else newData[name].type = "colour"
+        if (name !== "athena") newData[name].type = "colour"
         setCharData(newData)
     }
 
@@ -99,7 +103,7 @@ function TheMap({ pTransition, pVariants }) {
     }
 
     const mouseMove = (name) => (e) => {
-        if (name !== "athena" || charData[name].type !== "bw") return
+        if (name !== "athena") return
         const newData = { ...charData }
         const rect = e.target.getBoundingClientRect()
         const mouseY = e.clientY
@@ -121,8 +125,9 @@ function TheMap({ pTransition, pVariants }) {
 
     return <motion.div initial="out" animate="in" exit="out" variants={pVariants} transition={pTransition}>
         <div className="w-screen h-screen flex justify-center items-center relative font-cursive">
-            <div className="absolute right-0 left-0 mx-auto top-0 p-4 text-center">
-                <h1 className="text-xl font-cursive underline hover:text-yellow-900 cursor-pointer" onClick={goBack}>Go back</h1>
+            <div className="absolute right-0 left-0 mx-auto top-0 p-4 text-center flex justify-center">
+                <h1 className="text-xl font-cursive underline hover:text-yellow-900 cursor-pointer px-8" onClick={goBack}>Go back</h1>
+                <h1 className="text-xl font-cursive underline hover:text-yellow-900 cursor-pointer px-8 animate-pulse" onClick={goNext}>Continue</h1>
             </div>
             <h3 className="text-3xl text-center">Over this map<br />Select a story to see<br />A different perspective<br />from The Unheard.</h3>
             <CornerImage bw={penelopeBW} colour={penelope} data={cornerData("penelope")} />

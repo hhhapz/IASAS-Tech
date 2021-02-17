@@ -37,7 +37,7 @@ const INITIAL = 1500;
 //     }
 // }
 
-function Report({ showPage, pTransition, pVariants }) {
+function Report({ pTransition, pVariants, id, back, next }) {
     const [continuing, setContinuing] = useState(false)
     const [data, setData] = useState(undefined)
     const history = useHistory()
@@ -56,13 +56,13 @@ function Report({ showPage, pTransition, pVariants }) {
     }
 
     const goBack = () => {
-        history.push("/")
+        history.push(back)
         if (!data) return
         data.target.pauseVideo()
     }
 
     const skip = () => {
-        history.push("/map")
+        history.push(next)
         if (!data) return
         data.target.pauseVideo()
     }
@@ -75,7 +75,7 @@ function Report({ showPage, pTransition, pVariants }) {
             return
         }
         setContinuing(true)
-        history.push("/map")
+        history.push(next)
     }
 
     return <motion.div initial="out" animate="in" exit="out" variants={pVariants} transition={pTransition}
@@ -89,7 +89,7 @@ function Report({ showPage, pTransition, pVariants }) {
         <div className="relative">
             <img src={TV} className="max-w-screen max-h-screen relative" alt="" />
             <YouTube
-                videoId="JBDISrTRDOk"
+                videoId={id}
                 id="reportPlayer"
                 onReady={onReportReady}
                 onEnd={pollFinish}

@@ -30,7 +30,7 @@ function Homepage({ showPage, pTransition, pVariants }) {
     setNext(false)
     toast.dismiss()
     clearTimeout(timeout)
-    history.push("/report")
+    history.push("/report/first")
   }
 
   useEffect(() => {

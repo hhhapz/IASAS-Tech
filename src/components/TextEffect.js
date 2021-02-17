@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import WordEffect from './WordEffect'
-import anime from "animejs"
+import anime from 'animejs'
+import scripture from '../assets/images/odyssey.webp'
 
 function TextEffect({ text, contText }) {
   const words = text.split(" ")
@@ -24,14 +25,14 @@ function TextEffect({ text, contText }) {
         opacity: [0, 1],
         easing: "easeOutCirc",
         duration: 1500,
-        delay: () => 6000 + 50 * changeIndexes.length
+        delay: () => 9000 + 50 * changeIndexes.length
       })
   }, [])
 
-  return <div className="flex flex-col justify-between items-center w-8/12 h-3/5">
-    <div className="flex flex-wrap justify-center w-full font-greek xl:text-xl 2xl:text-2xl 3xl:text-4xl">
-
-      {words.map(({ type, latin, greek, index }) => {
+  return <div className="flex flex-col justify-between w-8/12 h-3/5">
+    <div className="w-full font-greek text-xl 2xl:text-2xl 3xl:text-4xl">
+      <img src={scripture} className="w-24 h-24 mr-4 float-left"></img>
+      {words.map(({ latin, greek, index }) => {
         return <WordEffect word={latin} greekWord={greek} index={index} changeIndex={changeIndexes[index]}></WordEffect>
       })}
     </div>

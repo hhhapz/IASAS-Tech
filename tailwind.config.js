@@ -15,7 +15,9 @@ module.exports = {
       transparent: 'transparent',
       current: 'currentColor',
 
-      black: colors.black,
+      black: '#2b2213',
+      zero: '#000',
+      backdrop: '#D5CFB4',
       white: colors.white,
       gray: colors.coolGray,
       red: colors.red,
@@ -68,12 +70,14 @@ module.exports = {
       spin: 'spin 1s linear infinite',
       ping: 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite',
       pulse: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      'golden-pulse': 'golden-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       bounce: 'bounce 1s infinite',
     },
     backgroundColor: (theme) => theme('colors'),
     backgroundImage: {
       none: 'none',
-      'homepage': "url('./assets/images/homepage.png')",
+      'homepage': "url('./assets/images/backdrop.jpg')",
+      'report': "url('./assets/images/tv.png')",
       'gradient-to-t': 'linear-gradient(to top, var(--tw-gradient-stops))',
       'gradient-to-tr': 'linear-gradient(to top right, var(--tw-gradient-stops))',
       'gradient-to-r': 'linear-gradient(to right, var(--tw-gradient-stops))',
@@ -163,7 +167,7 @@ module.exports = {
     },
     fontFamily: {
       greek: ["'EB Garamond'", 'serif'],
-      cursive: ["'La Belle Aurore'", 'cursive'],
+      cursive: ["Anaktoria", 'cursive'],
       sans: [
         'ui-sans-serif',
         'system-ui',
@@ -363,6 +367,7 @@ module.exports = {
       '3/6': '50%',
       '4/6': '66.666667%',
       '5/6': '83.333333%',
+      'map': '40%',
       full: '100%',
       screen: '100vh',
     }),
@@ -400,6 +405,15 @@ module.exports = {
       pulse: {
         '50%': {
           opacity: '.5',
+        },
+      },
+      'golden-pulse': {
+        '0%, 100%': {
+          'text-shadow': '0px, 0px, 18px #ffad00'
+        },
+        '50%': {
+          opacity: '.5',
+          'text-shadow': '0px, 0px, 2px #ffad00'
         },
       },
       bounce: {
@@ -645,7 +659,7 @@ module.exports = {
       DEFAULT: 'background-color, border-color, color, fill, stroke, opacity, box-shadow, transform',
       colors: 'background-color, border-color, color, fill, stroke',
       opacity: 'opacity',
-      shadow: 'box-shadow',
+      hadow: 'box-shadow',
       transform: 'transform',
     },
     transitionTimingFunction: {
@@ -738,12 +752,12 @@ module.exports = {
     alignContent: ['responsive'],
     alignItems: ['responsive'],
     alignSelf: ['responsive'],
-    animation: ['responsive'],
+    animation: [],
     appearance: ['responsive'],
     backgroundAttachment: ['responsive'],
     backgroundClip: ['responsive'],
     backgroundColor: ['responsive', 'dark', 'group-hover', 'focus-within', 'hover', 'focus'],
-    backgroundImage: ['responsive'],
+    backgroundImage: ['responsive', 'hover'],
     backgroundOpacity: ['responsive', 'group-hover', 'focus-within', 'hover', 'focus'],
     backgroundPosition: ['responsive'],
     backgroundRepeat: ['responsive'],
@@ -853,5 +867,7 @@ module.exports = {
     wordBreak: ['responsive'],
     zIndex: ['responsive', 'focus-within', 'focus'],
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/aspect-ratio'),
+  ],
 }

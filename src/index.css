@@ -1,8 +1,107 @@
 @import url('https://fonts.googleapis.com/css2?family=La+Belle+Aurore&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@1,500&display=swap');
 
+@font-face {
+  font-family: 'Anaktoria';
+  font-weight: 400;
+  src: url('./assets/fonts/Anaktoria.otf');
+}
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+.strikethrough {
+  position: relative;
+}
+.strikethrough:before {
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 50%;
+  right: 100%;
+  border-top: 2px solid;
+  border-color: black;
+
+  -webkit-transform:rotate(-1deg);
+  -moz-transform:rotate(-1deg);
+  -ms-transform:rotate(-1deg);
+  -o-transform:rotate(-1deg);
+  transform:rotate(-1deg);
+
+  transition: right 3s;
+}
+
+.strikethrough-enable:before {
+  left: 0;
+  top: 50%;
+  right: 0;
+}
+
+.replacement {
+    transition: opacity 3s, color 0.5s;
+}
+
+.report-video {
+  top: 16%;
+  bottom: 13.2%;
+  left: 6.83%;
+  right: 23%;
+}
+
+.penelope {
+  top: 0;
+  left: 0;
+  bottom: 68%;
+}
+
+.tiresias {
+  bottom: 2%;
+  left: 0;
+  top: 62%;
+}
+
+.seductress {
+  top: 2%;
+  right: 2%;
+  bottom: 62%
+}
+
+.athena {
+  bottom: 4%;
+  right: 0%;
+  top: 50%
+}
+
+.hearts {
+  right: 3%;
+  left: 86%;
+  top: 33%;
+  bottom: 51%;
+}
+
+.shocklines {
+  top: 0;
+  right: 0%;
+  left: 86%;
+  bottom: 84%
+}
+
+.stringhor {
+  left: 10%;
+  right: 22%;
+  top: 72%;
+  bottom: -1%;
+}
+
+.stringver {
+  top: 22%;
+  left: -1%;
+  bottom: 1%;
+}
+
+.wave {
+  left: 69%;
+  right: 4%;
+  top: 74%;
+  bottom: 1%;
+}

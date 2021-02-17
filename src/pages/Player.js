@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { React, useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import TV from '../assets/images/tv.png'
 import YouTube from 'react-youtube';
 
@@ -37,12 +37,15 @@ const INITIAL = 1500;
 //     }
 // }
 
-function Report({ pTransition, pVariants, id, back, next }) {
+function Player({ pTransition, pVariants, ids }) {
     const [continuing, setContinuing] = useState(false)
     const [data, setData] = useState(undefined)
     const history = useHistory()
+    let { type } = useParams()
+    let { id, next, back, tv, image } = ids[type]
 
     useEffect(() => {
+        if (!ids[type]) history.push("/")
 
         setTimeout(() => {
         }, INITIAL)
@@ -79,33 +82,55 @@ function Report({ pTransition, pVariants, id, back, next }) {
     }
 
     return <motion.div initial="out" animate="in" exit="out" variants={pVariants} transition={pTransition}
-        className="flex justify-center bg-backdrop">
+        className="flex justify-center items-center bg-backdrop h-full w-full">
+        {image &&
+            <img alt="" src={image} className="absolute top-0 right-0 h-2/6" />}
         <div className="absolute right-0  bottom-0 p-4">
             <h1 className="text-xl font-cursive underline hover:text-yellow-900 cursor-pointer" onClick={skip}>Skip</h1>
         </div>
         <div className="absolute left-0  bottom-0 p-4">
             <h1 className="text-xl font-cursive underline hover:text-yellow-900 cursor-pointer" onClick={goBack}>Go back</h1>
         </div>
-        <div className="relative">
-            <img src={TV} className="max-w-screen max-h-screen relative" alt="" />
-            <YouTube
-                videoId={id}
-                id="reportPlayer"
-                onReady={onReportReady}
-                onEnd={pollFinish}
-                onPause={pollFinish}
-                containerClassName="absolute report-video"
-                opts={{
-                    width: "100%",
-                    height: "100%",
-                    playerVars: {
-                        autoplay: 0,
-                        enablejsapi: 1,
-                    }
-                }}
-            />
-        </div>
+        {tv &&
+            <div className="relative z-10">
+                <img src={TV} className="max-w-screen max-h-screen" alt="" />
+                <YouTube
+                    videoId={id}
+                    id="reportPlayer"
+                    onReady={onReportReady}
+                    onEnd={pollFinish}
+                    onPause={pollFinish}
+                    containerClassName="absolute z-10 report-video"
+                    opts={{
+                        width: "100%",
+                        height: "100%",
+                        playerVars: {
+                            autoplay: 0,
+                            enablejsapi: 1,
+                        }
+                    }}
+                />
+            </div>}
+        {!tv &&
+            <div className="w-9/12 h-5/6 z-10">
+                <YouTube
+                    videoId={id}
+                    id="reportPlayer"
+                    onReady={onReportReady}
+                    onEnd={pollFinish}
+                    onPause={pollFinish}
+                    containerClassName="max-w-full z-10 h-full"
+                    opts={{
+                        width: "100%",
+                        height: "100%",
+                        playerVars: {
+                            autoplay: 0,
+                            enablejsapi: 1,
+                        }
+                    }}
+                />
+            </div>}
     </motion.div>
 }
 
-export default Report
+export default Player

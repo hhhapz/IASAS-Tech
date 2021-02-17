@@ -5,11 +5,59 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Homepage from './pages/Homepage'
 import TheMap from './pages/Map';
-import Report from './pages/Report';
+import Player from './pages/Player';
+import Credits from './pages/Credits';
+
+import athena from './assets/images/map/mono/calypso.png'
+import calypso from './assets/images/map/mono/athena.png'
+import penelope from './assets/images/map/colour/penelope.png'
+import seductress from './assets/images/map/colour/seductress.png'
+import tiresias from './assets/images/map/colour/tiresias.png'
 
 const IDS = {
-  first: "JBDISrTRDOk",
-  last: "dQw4w9WgXcQ"
+  first: {
+    id: "JBDISrTRDOk",
+    next: "/map",
+    back: "/",
+    tv: true,
+  },
+  last: {
+    id: "dQw4w9WgXcQ",
+    next: "/credits",
+    back: "/map",
+    tv: true,
+  },
+
+  penelope: {
+    id: "Gs069dndIYk",
+    next: "/map/penelope",
+    back: "/map",
+    image: penelope
+  },
+  tiresias: {
+    id: "Rbm6GXllBiw",
+    next: "/map/tiresias",
+    back: "/map",
+    image: tiresias
+  },
+  seductress: {
+    id: "fNFzfwLM72c",
+    next: "/map/seductress",
+    back: "/map",
+    image: seductress
+  },
+  athena: {
+    id: "xFrGuyw1V8s",
+    next: "/map/athena",
+    back: "/map",
+    image: athena
+  },
+  calypso: {
+    id: "8UVNT4wvIGY",
+    next: "/map/calypso",
+    back: "/map",
+    image: calypso
+  },
 }
 
 function App() {
@@ -30,14 +78,20 @@ function App() {
     <div className="App bg-backdrop w-screen h-screen overflow-hidden">
       <AnimatePresence exitBeforeEnter>
         <Switch location={location} key={location.pathname}>
+          <Route path="/credits" exact >
+            <Credits pTransition={pTransition} pVariants={pVariants} />
+          </Route>
           <Route path="/map" exact >
             <TheMap pTransition={pTransition} pVariants={pVariants} />
           </Route>
-          <Route path="/report/first" exact >
-            <Report pTransition={pTransition} pVariants={pVariants} id={IDS.first} back="/" next="/map" />
+          <Route path="/map/:watched" exact >
+            <TheMap pTransition={pTransition} pVariants={pVariants} />
           </Route>
-          <Route path="/report/last" exact >
-            <Report pTransition={pTransition} pVariants={pVariants} id={IDS.last} back="/map" next="/credits" />
+          <Route path="/report/:type" exact >
+            <Player pTransition={pTransition} pVariants={pVariants} ids={IDS} />
+          </Route>
+          <Route path="/video/:type" exact >
+            <Player pTransition={pTransition} pVariants={pVariants} ids={IDS} />
           </Route>
           <Route path="/" exact >
             <Homepage pTransition={pTransition} pVariants={pVariants} />

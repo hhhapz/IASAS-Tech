@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { React, useState, useEffect } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 
 import athenaBW from '../assets/images/map/mono/athena.png'
 import calypsoBW from '../assets/images/map/mono/calypso.png'
@@ -52,15 +52,42 @@ function TheMap({ pTransition, pVariants }) {
         seductress: { type: "bw", classes: "" },
         athena: { type: "none", classes: "" },
     })
+
     const history = useHistory()
+    let { watched } = useParams()
 
     useEffect(() => {
+
         if (Object.keys(queryStorage()).length === 0) {
             updateStorage("penelope", "bw")
             updateStorage("tiresias", "bw")
             updateStorage("seductress", "bw")
             updateStorage("athena", "none")
         }
+        if (watched) {
+            switch (watched) {
+                case "penelope":
+                case "tiresias":
+                case "seductress":
+                    updateStorage(watched, "colour")
+                    break
+                case "athena":
+                    if (queryStorage().athena === "both") {
+                        break
+                    }
+                    if (queryStorage().athena === "athena") updateStorage("athena", "both")
+                    else updateStorage("athena", "calypso")
+                    break
+                case "calypso":
+                    if (queryStorage().athena === "both") break
+                    if (queryStorage().athena === "calypso") updateStorage("athena", "both")
+                    else updateStorage("athena", "athena")
+                    break
+                default:
+                    console.log("unknown param", watched);
+            }
+        }
+
         const data = queryStorage()
         setCharData({
             penelope: { type: data.penelope, classes: "" },
@@ -71,13 +98,12 @@ function TheMap({ pTransition, pVariants }) {
 
         setTimeout(() => {
         }, INITIAL)
-    }, [setCharData])
+    }, [setCharData, watched])
 
     const goBack = () => {
-        history.push("/report")
+        history.push("/report/first")
     }
     const goNext = () => {
-        console.log("push");
         history.push("/report/last")
     }
 
@@ -100,7 +126,13 @@ function TheMap({ pTransition, pVariants }) {
     }
 
     const onClick = (name) => () => {
-        console.log("click", name)
+        if (name !== "athena") {
+            history.push(`/video/${name}`)
+            return
+        }
+
+        if (charData[name].type === "athena") history.push(`/video/calypso`)
+        else history.push(`/video/athena`)
     }
 
     const mouseMove = (name) => (e) => {
@@ -109,6 +141,7 @@ function TheMap({ pTransition, pVariants }) {
         const rect = e.target.getBoundingClientRect()
         const mouseY = e.clientY
         const center = rect.y + rect.height / 2
+
         if (mouseY > center) newData[name].type = "athena"
         else newData[name].type = "calypso"
         setCharData(newData)
@@ -127,10 +160,24 @@ function TheMap({ pTransition, pVariants }) {
     return <motion.div initial="out" animate="in" exit="out" variants={pVariants} transition={pTransition}>
         <div className="w-screen h-screen flex justify-center items-center relative font-cursive">
             <div className="absolute right-0 left-0 mx-auto top-0 p-4 text-center flex justify-center">
-                <h1 className="text-xl font-cursive underline hover:text-yellow-900 cursor-pointer px-8" onClick={goBack}>Go back</h1>
-                <h1 className="text-xl font-cursive underline hover:text-yellow-900 cursor-pointer px-8 animate-pulse" onClick={goNext}>Continue</h1>
+                <h3 className="text-xl font-cursive underline hover:text-yellow-900 cursor-pointer px-8" onClick={goBack}>Go back</h3>
             </div>
-            <h3 className="text-3xl text-center">Over this map<br />Select a story to see<br />A different perspective<br />from The Unheard.</h3>
+            {(() => {
+                if (queryStorage().penelope === "colour"
+                    && queryStorage().tiresias === "colour"
+                    && queryStorage().seductress === "colour"
+                    && queryStorage().athena === "both")
+                    return <h1 className="text-7xl font-cursive underline hover:text-yellow-900 cursor-pointer px-8"
+                        onClick={goNext}>Continue</h1>
+
+                else return <h1 className="text-3xl text-center">
+                    Over this map<br />
+                    Select a story to see<br />
+                    A different perspective<br />
+                    from The Unheard.</h1>
+            })()
+
+            }
             <CornerImage bw={penelopeBW} colour={penelope} data={cornerData("penelope")} />
             <CornerImage bw={tiresiasBW} colour={tiresias} data={cornerData("tiresias")} />
             <CornerImage bw={seductressBW} colour={seductress} data={cornerData("seductress")} />
@@ -145,11 +192,11 @@ function TheMap({ pTransition, pVariants }) {
             <div className="absolute hearts pointer-events-none">
                 <img alt="" src={charData.seductress.type === "colour" ? hearts : heartsBW} className="w-full h-full"></img>
             </div>
-            <div className="absolute shocklines pointer-events-nones">
+            <div className="absolute shocklines pointer-events-none">
                 <img alt="" src={charData.seductress.type === "colour" ? shocklines : shocklinesBW} className="w-full h-full"></img>
             </div>
             <div className="absolute wave pointer-events-none">
-                <img alt="" src={charData.athena.type !== "colour" ? waveBW : wave} className="w-full h-full"></img>
+                <img alt="" src={queryStorage().athena !== "both" ? waveBW : wave} className="w-full h-full"></img>
             </div>
         </div>
     </motion.div>
@@ -157,7 +204,11 @@ function TheMap({ pTransition, pVariants }) {
 
 function CornerImage({ data, ...types }) {
     const { name, charData, onEnter, onLeave, onClick } = data
-    return <div className={`absolute ${name} ${charData.classes}`} onMouseEnter={onEnter} onMouseLeave={onLeave} onClick={onClick} onMouseMove={data.mouseMove}>
+    return <div className={`absolute cursor-pointer ${name} ${charData.classes}`}
+        onMouseEnter={onEnter}
+        onMouseLeave={onLeave}
+        onClick={onClick}
+        onMouseMove={data.mouseMove}>
         <img alt="" src={types[charData.type]} className="max-h-full" />
     </div>
 }

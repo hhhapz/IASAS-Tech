@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import CrossFadeImage from 'react-crossfade-image'
+import CrossFadeImage from '../components/Crossfade'
 import { React, useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import frame from '../assets/images/homepage/frame.webp'
@@ -70,7 +70,7 @@ function Homepage({ showPage, pTransition, pVariants }) {
         <h2 className={`${TITLE2} font-cursive text-center mb-8 ${transition[0]}`}>The Odyssey, Book One, Chapter 2</h2>
       </span>
       <div className="flex flex-wrap justify-center">
-        <img src={frame} className="w-1/2"></img>
+        <img alt="" src={frame} className="w-1/2"></img>
         <div className="flex flex-col justify-evenly w-1/2">
           {images.map((src, i) => <CrossFadeImage src={src} duration={1000} key={i} alt="" timingFunction="ease-in-out"></CrossFadeImage>)}
         </div>

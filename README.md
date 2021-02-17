@@ -1,66 +1,45 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# IASAS DANCE, DRAMA & TECH PRODUCTION
 
-## Running on Repl.it
+## The Unheard - [View Online](http://iasas.jisedu.or.id)
 
-Simply hit run once and start coding. Will hot reload the web view. 
+---
 
-## Running Scripts
+## Team
 
-You can open a new shell window by hitting command+shift+S on macOS or control+shift+S (you can also access shortcuts from the `?` in the bottom right corner).
+* Directed by Erica and Mike Cali
 
-When in the shell you can run any of the following scripts:
+* Written by Erica Cali
 
-### `yarn test`
+* Web Development Director: Marilou Anderson
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* Web Developers: Hamza A
 
-### `yarn build`
+* Web Designers: Meagan C, Hamza A, Orsen Q
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* Digital Artwork: Brianna P
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Tech Stack
 
-### `yarn eject`
+* Written in [React JS](http://reactjs.com/)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+* All styling uses [TailwindCSS](https://tailwindcss.com/)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* All animations use [Framer-Motion](https://www.framer.com/motion/)
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+* Build tool uses [Craco](https://github.com/gsoft-inc/craco) to integrate with Tailwind
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+* Written with love and care <3
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Build instructions
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+* Requires npm. Tested with node 15.8
 
-### Code Splitting
+* Download dependencies using `npm install`
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+* To run it locally, use `npm run start`
 
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+* To build a production version, use `npm run build`

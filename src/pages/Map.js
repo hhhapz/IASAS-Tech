@@ -41,6 +41,7 @@ const updateStorage = (name, value) => {
     }
 
     newStorage[name] = value
+    console.log(newStorage);
     window.localStorage["seen"] = JSON.stringify(newStorage)
 }
 
@@ -54,7 +55,7 @@ function TheMap({ pTransition, pVariants }) {
     const history = useHistory()
 
     useEffect(() => {
-        if (!queryStorage()) {
+        if (Object.keys(queryStorage()).length === 0) {
             updateStorage("penelope", "bw")
             updateStorage("tiresias", "bw")
             updateStorage("seductress", "bw")

@@ -170,11 +170,12 @@ function TheMap({ pTransition, pVariants }) {
                     return <h1 className="text-7xl font-cursive underline hover:text-yellow-900 cursor-pointer px-8"
                         onClick={goNext}>Continue</h1>
 
-                else return <h1 className="text-3xl text-center">
-                    Over this map<br />
-                    Select a story to see<br />
-                    A different perspective<br />
-                    from The Unheard.</h1>
+                else return <h1 className="lg:text-xl xl:text-2xl 2xl:text-3xl text-center">
+                    In order to learn the whole truth of a story, <br />
+                    All perspectives must be considered, no voice denied.<br />
+                    <br />
+                    Click on each character,  and follow each journey,<br />
+                    To learn the whole story; hear the tale from each side.</h1>
             })()
 
             }

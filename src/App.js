@@ -31,48 +31,45 @@ const IDS = {
   penelope: {
     id: "Gs069dndIYk",
     next: "/map/penelope",
-    back: "/map",
     image: penelope
   },
   tiresias: {
     id: "Rbm6GXllBiw",
     next: "/map/tiresias",
-    back: "/map",
     image: tiresias
   },
   seductress: {
     id: "fNFzfwLM72c",
     next: "/map/seductress",
-    back: "/map",
     image: seductress
   },
   athena: {
     id: "xFrGuyw1V8s",
     next: "/map/athena",
-    back: "/map",
     image: athena
   },
   calypso: {
     id: "8UVNT4wvIGY",
     next: "/map/calypso",
-    back: "/map",
     image: calypso
   },
 }
 
+const pTransition = {
+  duration: 1
+}
+
+const pVariants = {
+  in: {
+    opacity: 1
+  },
+  out: {
+    opacity: 0
+  }
+}
+
 function App() {
   const location = useLocation()
-  const pTransition = {
-    duration: 2
-  }
-  const pVariants = {
-    in: {
-      opacity: 1
-    },
-    out: {
-      opacity: 0
-    }
-  }
 
   return (
     <div className="App bg-backdrop w-screen h-screen overflow-hidden">

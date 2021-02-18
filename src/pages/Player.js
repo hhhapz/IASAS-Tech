@@ -85,12 +85,15 @@ function Player({ pTransition, pVariants, ids }) {
         className="flex justify-center items-center bg-backdrop h-full w-full">
         {image &&
             <img alt="" src={image} className="absolute top-0 right-0 h-2/6" />}
-        <div className="absolute right-0  bottom-0 p-4">
-            <h1 className="text-xl font-cursive underline hover:text-yellow-900 cursor-pointer" onClick={skip}>Skip</h1>
-        </div>
-        <div className="absolute left-0  bottom-0 p-4">
-            <h1 className="text-xl font-cursive underline hover:text-yellow-900 cursor-pointer" onClick={goBack}>Go back</h1>
-        </div>
+        {skip &&
+            <div className="absolute right-0  bottom-0 p-4">
+                <h1 className="text-xl 2xl:text-3xl 3xl:text-5xl font-cursive underline hover:text-yellow-900 cursor-pointer" onClick={skip}>Skip</h1>
+            </div>}
+        {back &&
+            <div className="absolute left-0  bottom-0 p-4 cursor-pointer" onClick={goBack}>
+                <h1 className="text-xl 2xl:text-3xl 3xl:text-5xl font-cursive underline hover:text-yellow-900">Go back</h1>
+            </div>
+        }
         {tv &&
             <div className="relative z-10">
                 <img src={TV} className="max-w-screen max-h-screen" alt="" />

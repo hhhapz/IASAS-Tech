@@ -8,10 +8,10 @@ import TheMap from './pages/Map';
 import Player from './pages/Player';
 import Credits from './pages/Credits';
 
-import athena from './assets/images/map/mono/calypso.png'
-import calypso from './assets/images/map/mono/athena.png'
+import athena from './assets/images/map/colour/athena.png'
+import monster from './assets/images/map/colour/monster.png'
 import penelope from './assets/images/map/colour/penelope.png'
-import seductress from './assets/images/map/colour/seductress.png'
+import calypso from './assets/images/map/colour/calypso.png'
 import tiresias from './assets/images/map/colour/tiresias.png'
 
 const IDS = {
@@ -38,20 +38,20 @@ const IDS = {
     next: "/map/tiresias",
     image: tiresias
   },
-  seductress: {
+  calypso: {
     id: "fNFzfwLM72c",
-    next: "/map/seductress",
-    image: seductress
+    next: "/map/calypso",
+    image: calypso
   },
   athena: {
     id: "xFrGuyw1V8s",
     next: "/map/athena",
     image: athena
   },
-  calypso: {
+  monster: {
     id: "8UVNT4wvIGY",
-    next: "/map/calypso",
-    image: calypso
+    next: "/map/monster",
+    image: monster
   },
 }
 
@@ -72,7 +72,7 @@ function App() {
   const location = useLocation()
 
   return (
-    <div className="App bg-backdrop w-screen h-screen overflow-hidden">
+    <div className="App bg-backdrop select-none w-screen h-screen overflow-hidden">
       <AnimatePresence exitBeforeEnter>
         <Switch location={location} key={location.pathname}>
           <Route path="/credits" exact >

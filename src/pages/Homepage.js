@@ -1,24 +1,41 @@
 import { motion } from 'framer-motion';
-import CrossFadeImage from '../components/Crossfade'
 import { React, useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import frame from '../assets/images/homepage/frame.webp'
 import { toast } from 'react-toastify'
 
-
-const greeks = [1, 2, 3, 4, 5, 6, 7, 8, 9].map(i => require(`../assets/images/homepage/greek${i}.webp`).default)
-const latins = [1, 2, 3, 4, 5, 6, 7, 8, 9].map(i => require(`../assets/images/homepage/latin${i}.webp`).default)
-
-const INITIAL = 5000;
+const INITIAL = 4000;
 // const INITIAL = 0;
-const BETWEEN = 500;
+const BETWEEN = 300;
 const PULSE = 1000;
 const PROMPT = 15000;
+
+const greeks = [1, 2, 3, 4, 5, 6, 7, 8, 9].map(i => {
+  const src = require(`../assets/images/homepage/greek${i}.png`).default
+  new Image().src = src
+  return {
+    src: src,
+    delay: INITIAL + i * BETWEEN,
+    initial: 1,
+    animate: 0,
+  }
+})
+const latins = [1, 2, 3, 4, 5, 6, 7, 8, 9].map(i => {
+  const src = require(`../assets/images/homepage/latin${i}.png`).default
+  new Image().src = src
+  return {
+    src: src,
+    delay: 100,
+    initial: 0,
+    animate: 1,
+  }
+})
+
 
 const TITLE1 = "2xl:text-6xl xl:text-5xl text-4xl"
 const TITLE2 = "2xl:text-5xl xl:text-4xl text-3xl"
 
-function Homepage({ showPage, pTransition, pVariants }) {
+function Homepage({ pTransition, pVariants }) {
   const [images, setImages] = useState(greeks)
   const [transition, setTransition] = useState(["strikethrough", "", "opacity-0"])
   const [timeout, setCode] = useState(-1)
@@ -35,14 +52,15 @@ function Homepage({ showPage, pTransition, pVariants }) {
 
   useEffect(() => {
     setImages(greeks)
+
     setTimeout(() => {
-      const newImages = greeks
+      const newImages = greeks.slice()
       setTransition(["strikethrough strikethrough-enable", "", "opacity-0"])
       latins.forEach((src, i) => {
         setTimeout(() => {
           newImages[i] = src
           setImages(newImages.slice())
-        }, BETWEEN * i);
+        }, BETWEEN * i + 800);
       })
 
       setTimeout(() => {
@@ -65,19 +83,31 @@ function Homepage({ showPage, pTransition, pVariants }) {
   return <motion.div initial="out" animate="in" exit="out" variants={pVariants} transition={pTransition}
 
     className="h-screen w-screen bg-homepage bg-cover bg-center flex justify-center items-center">
-    <div className="flex flex-col justify-between w-7/12 max-w-2xl">
+    <div className="flex flex-col justify-between w-8/12 max-w-4xl">
       <span className="flex justify-center">
         <h2 className={`${TITLE2} font-cursive text-center mb-8 ${transition[0]}`}>The Odyssey, Book One, Chapter 2</h2>
       </span>
       <div className="flex flex-wrap justify-center">
-        <img alt="" src={frame} className="w-1/2"></img>
-        <div className="flex flex-col justify-evenly w-1/2">
-          {images.map((src, i) => <CrossFadeImage src={src} duration={1000} key={i} alt="" timingFunction="ease-in-out"></CrossFadeImage>)}
+        <img alt="" src={frame} className="w-1/2 h-full"></img>
+        <div className="flex flex-col justify-evenly w-1/2 -mt-4">
+          {images.map((data, i) => <motion.img src={data.src} key={i} alt="" className="pointer-events-none"
+            initial={{
+              opacity: data.initial
+            }}
+            animate={{
+              opacity: data.animate
+            }}
+            transition={{
+              duration: .5,
+              delay: data.delay / 1000
+            }}
+
+          />)}
         </div>
-        <h2 className={`${TITLE1} font-cursive text-center replacement mt-12 ${transition[2]}`}
-          onClick={next}
-        >{transition[1]}&nbsp;</h2>
       </div>
+      <h2 className={`inline-block ${TITLE1} font-cursive text-center replacement mt-12 ${transition[2]}`}
+        onClick={next}
+      >{transition[1]}&nbsp;</h2>
     </div>
   </motion.div>
 

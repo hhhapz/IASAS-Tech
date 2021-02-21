@@ -9,16 +9,17 @@
 @tailwind utilities;
 
 .strikethrough {
-  position: relative;
+  @apply relative;
 }
+
 .strikethrough:before {
-  position: absolute;
   content: "";
   left: 0;
   top: 50%;
   right: 100%;
-  border-top: 2px solid;
+  border-top: 4px solid;
   border-color: black;
+  position: absolute;
 
   -webkit-transform:rotate(-1deg);
   -moz-transform:rotate(-1deg);
@@ -41,9 +42,9 @@
 
 .report-video {
   top: 16%;
-  bottom: 13.2%;
-  left: 6.83%;
-  right: 23%;
+  bottom: 13%;
+  left: 8.45%;
+  right: 22.4%;
 }
 
 .report-video.notv {
@@ -65,7 +66,7 @@
   top: 62%;
 }
 
-.seductress {
+.calypso {
   top: 2%;
   right: 2%;
   bottom: 62%

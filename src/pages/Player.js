@@ -84,19 +84,10 @@ function Player({ pTransition, pVariants, ids }) {
     return <motion.div initial="out" animate="in" exit="out" variants={pVariants} transition={pTransition}
         className="flex justify-center items-center bg-backdrop h-full w-full">
         {image &&
-            <img alt="" src={image} className="absolute top-0 right-0 h-2/6" />}
-        {skip &&
-            <div className="absolute right-0  bottom-0 p-4">
-                <h1 className="text-xl 2xl:text-3xl 3xl:text-5xl font-cursive underline hover:text-yellow-900 cursor-pointer" onClick={skip}>Skip</h1>
-            </div>}
-        {back &&
-            <div className="absolute left-0  bottom-0 p-4 cursor-pointer" onClick={goBack}>
-                <h1 className="text-xl 2xl:text-3xl 3xl:text-5xl font-cursive underline hover:text-yellow-900">Go back</h1>
-            </div>
-        }
+            <img alt="" src={image} className="absolute top-0 right-0 h-2/6 pointer-events-none" />}
         {tv &&
             <div className="relative z-10">
-                <img src={TV} className="max-w-screen max-h-screen" alt="" />
+                <img src={TV} className="max-w-screen max-h-screen ml-8 pointer-events-none" alt="" />
                 <YouTube
                     videoId={id}
                     id="reportPlayer"
@@ -133,6 +124,15 @@ function Player({ pTransition, pVariants, ids }) {
                     }}
                 />
             </div>}
+        {skip &&
+            <div className="absolute right-0  bottom-0 p-4 hover:text-yellow-900 cursor-pointer z-10" onClick={skip}>
+                <h1 className="text-2xl 2xl:text-3xl 3xl:text-5xl font-cursive underline">Skip</h1>
+            </div>}
+        {back &&
+            <div className="absolute left-0  bottom-0 p-4 hover:text-yellow-900 cursor-pointer z-10" onClick={goBack}>
+                <h1 className="text-2xl 2xl:text-3xl 3xl:text-5xl font-cursive underline">Go back</h1>
+            </div>
+        }
     </motion.div>
 }
 

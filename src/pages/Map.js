@@ -1,17 +1,21 @@
 import { motion } from 'framer-motion';
 import { React, useState, useEffect } from 'react'
+import MouseTooltip from '../components/MouseTooltip'
 import { useHistory, useParams } from 'react-router-dom'
 
+import coin from '../assets/images/coin.png'
+
 import athenaBW from '../assets/images/map/mono/athena.png'
-import calypsoBW from '../assets/images/map/mono/calypso.png'
-import athenaCalypsoBW from '../assets/images/map/mono/athena_calypso.png'
+import monsterBW from '../assets/images/map/mono/monster.png'
+import bothBW from '../assets/images/map/mono/athena_monster.png'
 
 import penelopeBW from '../assets/images/map/mono/penelope.png'
-import seductressBW from '../assets/images/map/mono/seductress.png'
+import calypsoBW from '../assets/images/map/mono/calypso.png'
 import tiresiasBW from '../assets/images/map/mono/tiresias.png'
-import athena from '../assets/images/map/colour/athena.png'
+
+import both from '../assets/images/map/colour/both.png'
 import penelope from '../assets/images/map/colour/penelope.png'
-import seductress from '../assets/images/map/colour/seductress.png'
+import calypso from '../assets/images/map/colour/calypso.png'
 import tiresias from '../assets/images/map/colour/tiresias.png'
 
 import heartsBW from '../assets/images/map/mono/hearts.png'
@@ -28,6 +32,13 @@ import wave from '../assets/images/map/colour/wave.png'
 
 // const INITIAL = 5000;
 const INITIAL = 1500;
+const titles = {
+    penelope: "The Faithful Wife",
+    tiresias: "The Blind Prophet",
+    calypso: "The Seductress",
+    athena: "The Witch and the Monster",
+    monster: "The Deity",
+}
 
 const queryStorage = () => {
     let storage = window.localStorage["seen"]
@@ -45,11 +56,23 @@ const updateStorage = (name, value) => {
     window.localStorage["seen"] = JSON.stringify(newStorage)
 }
 
+const completed = () =>
+    queryStorage().penelope === "colour"
+    && queryStorage().tiresias === "colour"
+    && queryStorage().calypso === "colour"
+    && queryStorage().athena === "both"
+
+
 function TheMap({ pTransition, pVariants }) {
+    const [tooltip, setTooltip] = useState({
+        text: "",
+        show: false,
+        offsetX: 30
+    })
     const [charData, setCharData] = useState({
         penelope: { type: "bw", classes: "" },
         tiresias: { type: "bw", classes: "" },
-        seductress: { type: "bw", classes: "" },
+        calypso: { type: "bw", classes: "" },
         athena: { type: "none", classes: "" },
     })
 
@@ -61,14 +84,14 @@ function TheMap({ pTransition, pVariants }) {
         if (Object.keys(queryStorage()).length === 0) {
             updateStorage("penelope", "bw")
             updateStorage("tiresias", "bw")
-            updateStorage("seductress", "bw")
+            updateStorage("calypso", "bw")
             updateStorage("athena", "none")
         }
         if (watched) {
             switch (watched) {
                 case "penelope":
                 case "tiresias":
-                case "seductress":
+                case "calypso":
                     updateStorage(watched, "colour")
                     break
                 case "athena":
@@ -76,11 +99,11 @@ function TheMap({ pTransition, pVariants }) {
                         break
                     }
                     if (queryStorage().athena === "athena") updateStorage("athena", "both")
-                    else updateStorage("athena", "calypso")
+                    else updateStorage("athena", "monster")
                     break
-                case "calypso":
+                case "monster":
                     if (queryStorage().athena === "both") break
-                    if (queryStorage().athena === "calypso") updateStorage("athena", "both")
+                    if (queryStorage().athena === "monster") updateStorage("athena", "both")
                     else updateStorage("athena", "athena")
                     break
                 default:
@@ -92,7 +115,7 @@ function TheMap({ pTransition, pVariants }) {
         setCharData({
             penelope: { type: data.penelope, classes: "" },
             tiresias: { type: data.tiresias, classes: "" },
-            seductress: { type: data.seductress, classes: "" },
+            calypso: { type: data.calypso, classes: "" },
             athena: { type: data.athena, classes: "" },
         })
 
@@ -107,7 +130,6 @@ function TheMap({ pTransition, pVariants }) {
         history.push("/report/last")
     }
 
-
     const determineClasses = (name) => {
         return `absolute ${name} ${charData[name].classes}`
     }
@@ -119,6 +141,7 @@ function TheMap({ pTransition, pVariants }) {
     }
 
     const onLeave = (name) => () => {
+        setTooltip({ ...tooltip, show: false, text: "" })
         const newData = { ...charData }
         newData[name].type = queryStorage()[name]
 
@@ -131,19 +154,34 @@ function TheMap({ pTransition, pVariants }) {
             return
         }
 
-        if (charData[name].type === "athena") history.push(`/video/calypso`)
+        if (charData[name].type === "athena") history.push(`/video/monster`)
         else history.push(`/video/athena`)
     }
 
     const mouseMove = (name) => (e) => {
-        if (name !== "athena") return
+        if (name !== "athena") {
+            setTooltip({
+                text: titles[name],
+                show: true,
+                offsetX: 20
+            })
+            return
+        }
         const newData = { ...charData }
         const rect = e.target.getBoundingClientRect()
+        const mouseX = e.clientX
         const mouseY = e.clientY
-        const center = rect.y + rect.height / 2
+        const athenaCornerX = rect.x + rect.width * 0.414
+        const athenaCornerY = rect.y + rect.height * 0.359
 
-        if (mouseY > center) newData[name].type = "athena"
-        else newData[name].type = "calypso"
+        if ((mouseX < athenaCornerX && mouseY < athenaCornerY) ||
+            (mouseX > athenaCornerX && mouseY > athenaCornerY)) newData[name].type = "monster"
+        else newData[name].type = "athena"
+        setTooltip({
+            text: titles[newData[name].type],
+            show: true,
+            offsetX: 20
+        })
         setCharData(newData)
     }
 
@@ -162,27 +200,28 @@ function TheMap({ pTransition, pVariants }) {
             <div className="absolute right-0 left-0 mx-auto top-0 p-4 text-center flex justify-center">
                 <h3 className="text-xl font-cursive underline hover:text-yellow-900 cursor-pointer px-8" onClick={goBack}>Go back</h3>
             </div>
-            {(() => {
-                if (queryStorage().penelope === "colour"
-                    && queryStorage().tiresias === "colour"
-                    && queryStorage().seductress === "colour"
-                    && queryStorage().athena === "both")
-                    return <h1 className="text-7xl font-cursive underline hover:text-yellow-900 cursor-pointer px-8"
-                        onClick={goNext}>Continue</h1>
+            <div className="relative">
+                {completed() ?
+                    <h1 className="text-7xl font-cursive underline hover:text-yellow-900 cursor-pointer px-8"
+                        onClick={goNext}>Continue</h1> :
 
-                else return <h1 className="lg:text-xl xl:text-2xl 2xl:text-3xl text-center">
-                    In order to learn the whole truth of a story, <br />
-                    All perspectives must be considered, no voice denied.<br />
-                    <br />
+                    <h1 className="lg:text-xl xl:text-2xl 2xl:text-3xl 3xl:text-4xl text-center px-12">
+                        In order to learn the whole truth of a story, <br />
+                    All perspectives must be considered, no voice denied.<br /><br />
                     Click on each character,  and follow each journey,<br />
                     To learn the whole story; hear the tale from each side.</h1>
-            })()
+                }
+                <br />
+                {!completed() && <div className="absolute top-full text-sm xl:text-lg 2xl:text-xl 3xl:text-2xl w-full flex justify-center items-center h-8 mt-4">
+                    <img className="h-8" src={coin} alt=""></img>
+                    <h3 className="ml-2"> Watch all five stories on this page to reach the end of your journey.</h3>
+                </div>}
+            </div>
 
-            }
             <CornerImage bw={penelopeBW} colour={penelope} data={cornerData("penelope")} />
             <CornerImage bw={tiresiasBW} colour={tiresias} data={cornerData("tiresias")} />
-            <CornerImage bw={seductressBW} colour={seductress} data={cornerData("seductress")} />
-            <CornerImage athena={athenaBW} calypso={calypsoBW} both={athena} none={athenaCalypsoBW} data={cornerData("athena")} />
+            <CornerImage bw={calypsoBW} colour={calypso} data={cornerData("calypso")} float />
+            <CornerImage athena={athenaBW} monster={monsterBW} both={both} none={bothBW} float data={cornerData("athena")} />
 
             <div className="absolute stringver pointer-events-none">
                 <img alt="" src={charData.penelope.type === "colour" ? stringver : stringverBW} className="max-h-full"></img>
@@ -191,15 +230,24 @@ function TheMap({ pTransition, pVariants }) {
                 <img alt="" src={charData.tiresias.type === "colour" ? stringhor : stringhorBW} className="w-full h-full"></img>
             </div>
             <div className="absolute hearts pointer-events-none">
-                <img alt="" src={charData.seductress.type === "colour" ? hearts : heartsBW} className="w-full h-full"></img>
+                <img alt="" src={charData.calypso.type === "colour" ? hearts : heartsBW} className="w-full h-full"></img>
             </div>
             <div className="absolute shocklines pointer-events-none">
-                <img alt="" src={charData.seductress.type === "colour" ? shocklines : shocklinesBW} className="w-full h-full"></img>
+                <img alt="" src={charData.calypso.type === "colour" ? shocklines : shocklinesBW} className="w-full h-full"></img>
             </div>
             <div className="absolute wave pointer-events-none">
-                <img alt="" src={queryStorage().athena !== "both" ? waveBW : wave} className="w-full h-full"></img>
+                <img alt="" src={["both", "athena"].includes(charData.athena.type) ? wave : waveBW} className="w-full h-full"></img>
             </div>
         </div>
+        <MouseTooltip
+            visibile={tooltip.show}
+            offsetX={tooltip.offsetX}
+            offsetY={20}
+        >
+            <div className={`font-cursive bg-black text-white py-1 px-2 rounded whitespace-nowrap ${tooltip.show ? "" : "hidden"}`}>
+                {tooltip.text}
+            </div>
+        </MouseTooltip>
     </motion.div>
 }
 
@@ -210,7 +258,8 @@ function CornerImage({ data, ...types }) {
         onMouseLeave={onLeave}
         onClick={onClick}
         onMouseMove={data.mouseMove}>
-        <img alt="" src={types[charData.type]} className="max-h-full" />
+        <img alt="" src={types[charData.type]}
+            className={`max-h-full pointer-events-none ${types.float ? "float-right" : ""}`} />
     </div>
 }
 

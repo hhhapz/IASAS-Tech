@@ -76,8 +76,8 @@ module.exports = {
     backgroundColor: (theme) => theme('colors'),
     backgroundImage: {
       none: 'none',
-      'homepage': "url('./assets/images/backdrop.jpg')",
-      'report': "url('./assets/images/tv.png')",
+      'homepage': "url('./assets/images/homepage/backdrop.jpg')",
+      'credits': "url('./assets/images/credits/credits.jpg')",
       'gradient-to-t': 'linear-gradient(to top, var(--tw-gradient-stops))',
       'gradient-to-tr': 'linear-gradient(to top right, var(--tw-gradient-stops))',
       'gradient-to-r': 'linear-gradient(to right, var(--tw-gradient-stops))',
@@ -369,6 +369,7 @@ module.exports = {
       '5/6': '83.333333%',
       '11/12': '91.666667%',
       full: '100%',
+      halfScreen: '50vh',
       screen: '100vh',
     }),
     inset: (theme, { negative }) => ({
@@ -464,6 +465,7 @@ module.exports = {
     maxHeight: (theme) => ({
       ...theme('spacing'),
       full: '100%',
+      halfScreen: '50vh',
       screen: '100vh',
     }),
     maxWidth: (theme, { breakpoints }) => ({
@@ -481,8 +483,10 @@ module.exports = {
       '6xl': '72rem',
       '7xl': '80rem',
       full: '100%',
+      halfScreen: '50vw',
       min: 'min-content',
       max: 'max-content',
+
       prose: '65ch',
       ...breakpoints(theme('screens')),
     }),
@@ -717,6 +721,7 @@ module.exports = {
       '10/12': '83.333333%',
       '11/12': '91.666667%',
       full: '100%',
+      halfScreen: '50vw',
       screen: '100vw',
       min: 'min-content',
       max: 'max-content',

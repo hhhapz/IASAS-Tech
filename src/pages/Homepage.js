@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { React, useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import frame from '../assets/images/homepage/frame.webp'
+import frame from '../assets/images/homepage/frame.gif'
 import { toast } from 'react-toastify'
 
 const INITIAL = 4000;

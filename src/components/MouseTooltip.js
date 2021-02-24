@@ -55,28 +55,40 @@ class MouseTooltip extends React.PureComponent {
         }
     };
 
-    getWidth = () => {
+
+    getData = () => {
         if (this.childNode) {
-            return this.childNode.clientWidth
+            return { width: this.childNode.clientWidth, height: this.childNode.clientHeight }
         }
 
         return 0
     }
 
 
+    getStyle() {
+        const style = {
+            display: 'block',
+            pointerEvents: 'none',
+            position: 'fixed',
+            top: this.state.yPosition + this.getData().height + 10 < document.body.clientHeight - 10
+                ? this.state.yPosition + 10
+                : document.body.clientHeight - this.getData().height - 10,
+            ...this.props.style,
+        }
+        if (this.props.side === "left") {
+            style.left = this.state.xPosition - this.getData().width - 20
+        } else {
+            style.left = this.state.xPosition + 20
+        }
+
+        return style
+    }
+
     render() {
         return (
             <div
                 className={this.props.className}
-                style={{
-                    display: this.props.visible && this.state.mouseMoved ? 'block' : 'none',
-                    position: 'fixed',
-                    top: this.state.yPosition + this.props.offsetY,
-                    left: this.state.xPosition + this.props.offsetX + this.getWidth() + 5 < document.body.clientWidth
-                        ? this.state.xPosition + this.props.offsetX
-                        : document.body.clientWidth - 5 - this.getWidth(),
-                    ...this.props.style,
-                }}
+                style={this.getStyle()}
                 ref={(r) => this.childNode = r}
             >
                 {this.props.children}

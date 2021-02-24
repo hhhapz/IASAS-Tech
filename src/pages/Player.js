@@ -7,36 +7,6 @@ import YouTube from 'react-youtube';
 // const INITIAL = 5000;
 const INITIAL = 1500;
 
-// function toggle(elem, state) {
-//     var isInFullScreen = (document.fullscreenElement && document.fullscreenElement !== null) ||
-//         (document.webkitFullscreenElement && document.webkitFullscreenElement !== null) ||
-//         (document.mozFullScreenElement && document.mozFullScreenElement !== null) ||
-//         (document.msFullscreenElement && document.msFullscreenElement !== null);
-
-//     if (!isInFullScreen && state) {
-//         if (elem.requestFullscreen) {
-//             elem.requestFullscreen();
-//         } else if (elem.mozRequestFullScreen) {
-//             elem.mozRequestFullScreen();
-//         } else if (elem.webkitRequestFullScreen) {
-//             elem.webkitRequestFullScreen();
-//         } else if (elem.msRequestFullscreen) {
-//             elem.msRequestFullscreen();
-//         }
-//     }
-//     if (isInFullScreen && !state) {
-//         if (document.exitFullscreen) {
-//             document.exitFullscreen();
-//         } else if (document.webkitExitFullscreen) {
-//             document.webkitExitFullscreen();
-//         } else if (document.mozCancelFullScreen) {
-//             document.mozCancelFullScreen();
-//         } else if (document.msExitFullscreen) {
-//             document.msExitFullscreen();
-//         }
-//     }
-// }
-
 function Player({ pTransition, pVariants, ids }) {
     const [continuing, setContinuing] = useState(false)
     const [data, setData] = useState(undefined)
@@ -82,12 +52,12 @@ function Player({ pTransition, pVariants, ids }) {
     }
 
     return <motion.div initial="out" animate="in" exit="out" variants={pVariants} transition={pTransition}
-        className="flex justify-center items-center bg-backdrop h-full w-full">
+        className={`flex justify-center items-center bg-backdrop h-full w-full ${tv ? "ml-4" : ""}`}>
         {image &&
             <img alt="" src={image} className="absolute top-0 right-0 h-2/6 pointer-events-none" />}
         {tv &&
             <div className="relative z-10">
-                <img src={TV} className="max-w-screen max-h-screen ml-8 pointer-events-none" alt="" />
+                <img src={TV} className="max-w-screen max-h-screen pointer-events-none" alt="" />
                 <YouTube
                     videoId={id}
                     id="reportPlayer"
@@ -126,11 +96,11 @@ function Player({ pTransition, pVariants, ids }) {
             </div>}
         {skip &&
             <div className="absolute right-0  bottom-0 p-4 hover:text-yellow-900 cursor-pointer z-10" onClick={skip}>
-                <h1 className="text-2xl 2xl:text-3xl 3xl:text-5xl font-cursive underline">Skip</h1>
+                <h1 className="text-2xl xl:text-3xl 3xl:text-5xl font-cursive underline">Skip</h1>
             </div>}
         {back &&
             <div className="absolute left-0  bottom-0 p-4 hover:text-yellow-900 cursor-pointer z-10" onClick={goBack}>
-                <h1 className="text-2xl 2xl:text-3xl 3xl:text-5xl font-cursive underline">Go back</h1>
+                <h1 className="text-2xl xl:text-3xl 3xl:text-5xl font-cursive underline">Go back</h1>
             </div>
         }
     </motion.div>

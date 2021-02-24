@@ -3,7 +3,7 @@ import { React, useState, useEffect } from 'react'
 import MouseTooltip from '../components/MouseTooltip'
 import { useHistory, useParams } from 'react-router-dom'
 
-import coin from '../assets/images/coin.png'
+import coin from '../assets/images/map/coin.png'
 
 import athenaBW from '../assets/images/map/mono/athena.png'
 import monsterBW from '../assets/images/map/mono/monster.png'
@@ -33,12 +33,43 @@ import wave from '../assets/images/map/colour/wave.png'
 // const INITIAL = 5000;
 const INITIAL = 1500;
 const titles = {
-    penelope: "The Faithful Wife",
-    tiresias: "The Blind Prophet",
-    calypso: "The Seductress",
-    athena: "The Witch and the Monster",
-    monster: "The Deity",
+    penelope: {
+        title: "The Faithful Wife – Penelope",
+        description: "Odysseus’ wife whom he left wehind when\n" +
+            "he went off to fight the Trojan Wars. She was\n" +
+            "alone with her son Telemachus for 20 years\n" +
+            "while Odysseus took his sweet time returning\n" +
+            "home. Penelope spent this time fighting off\n" +
+            "suitors and weaving a shroud.\n"
+    },
+    tiresias: {
+        title: "The Blind Prophet - Tiresias",
+        description: "The blind prophet of the underworld.\n" +
+            "Can see the future, and occasionally\n" +
+            "shares some of his prophecies with others."
+    },
+    calypso: {
+        title: "The Seductress - Calypso",
+        description: "A beautiful nymph who captured Odysseus,\n" +
+            "fell in love with him, and kept him on her\n" +
+            "island for 7 years."
+    },
+    athena: {
+        title: "The Witch and the Monster - Athena",
+        description: "A goddess of wisdom, war, handicraft\n" +
+            "and practical reason."
+    },
+    monster: {
+        title: "The Deity - Scylla",
+        description: "A once-beautiful nymph of the sea, she was\n" +
+            "turned into a terrible monster by Circe, a\n" +
+            "powerful witch who was jealous of Scylla.\n" +
+            "(Circe also turned Odysseus’ men into pigs\n" +
+            "when they landed on her island)."
+    },
 }
+
+
 
 const queryStorage = () => {
     let storage = window.localStorage["seen"]
@@ -67,7 +98,8 @@ function TheMap({ pTransition, pVariants }) {
     const [tooltip, setTooltip] = useState({
         text: "",
         show: false,
-        offsetX: 30
+        offsetX: 30,
+        side: "",
     })
     const [charData, setCharData] = useState({
         penelope: { type: "bw", classes: "" },
@@ -141,7 +173,7 @@ function TheMap({ pTransition, pVariants }) {
     }
 
     const onLeave = (name) => () => {
-        setTooltip({ ...tooltip, show: false, text: "" })
+        setTooltip({ ...tooltip, show: false, text: "", desc: "" })
         const newData = { ...charData }
         newData[name].type = queryStorage()[name]
 
@@ -161,9 +193,10 @@ function TheMap({ pTransition, pVariants }) {
     const mouseMove = (name) => (e) => {
         if (name !== "athena") {
             setTooltip({
-                text: titles[name],
+                text: titles[name].title,
+                desc: titles[name].description,
                 show: true,
-                offsetX: 20
+                side: name == "calypso" ? "left" : "right"
             })
             return
         }
@@ -178,9 +211,10 @@ function TheMap({ pTransition, pVariants }) {
             (mouseX > athenaCornerX && mouseY > athenaCornerY)) newData[name].type = "monster"
         else newData[name].type = "athena"
         setTooltip({
-            text: titles[newData[name].type],
+            text: titles[newData[name].type].title,
+            desc: titles[newData[name].type].description,
             show: true,
-            offsetX: 20
+            side: "left"
         })
         setCharData(newData)
     }
@@ -243,9 +277,11 @@ function TheMap({ pTransition, pVariants }) {
             visibile={tooltip.show}
             offsetX={tooltip.offsetX}
             offsetY={20}
+            side={tooltip.side}
         >
-            <div className={`font-cursive bg-black text-white py-1 px-2 rounded whitespace-nowrap ${tooltip.show ? "" : "hidden"}`}>
+            <div className={`text-2xl font-cursive bg-black text-white py-1 px-2 rounded whitespace-nowrap ${tooltip.show ? "" : "hidden"}`}>
                 {tooltip.text}
+                <pre className="text-lg font-serif"><br />{tooltip.desc}</pre>
             </div>
         </MouseTooltip>
     </motion.div>

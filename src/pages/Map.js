@@ -242,8 +242,8 @@ function TheMap({ pTransition, pVariants }) {
                     <h1 className="lg:text-xl xl:text-2xl 2xl:text-3xl 3xl:text-4xl text-center px-12">
                         In order to learn the whole truth of a story, <br />
                     All perspectives must be considered, no voice denied.<br /><br />
-                    Click on each character,  and follow each journey,<br />
-                    To learn the whole story; hear the tale from each side.</h1>
+                    Click on each character, and follow each journey,<br />
+                    To learn the whole story, have each voice aplified.</h1>
                 }
                 <br />
                 {!completed() && <div className="absolute top-full text-sm xl:text-lg 2xl:text-xl 3xl:text-2xl w-full flex justify-center items-center h-8 mt-4">

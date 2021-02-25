@@ -35,8 +35,8 @@ const INITIAL = 1500;
 const titles = {
     penelope: {
         title: "The Faithful Wife – Penelope",
-        description: "Odysseus’ wife whom he left wehind when\n" +
-            "he went off to fight the Trojan Wars. She was\n" +
+        description: "Odysseus’ wife whom he left behind when\n" +
+            "he went off to fight the Trojan War. She was\n" +
             "alone with her son Telemachus for 20 years\n" +
             "while Odysseus took his sweet time returning\n" +
             "home. Penelope spent this time fighting off\n" +
@@ -55,17 +55,17 @@ const titles = {
             "island for 7 years."
     },
     athena: {
-        title: "The Witch and the Monster - Athena",
-        description: "A goddess of wisdom, war, handicraft\n" +
-            "and practical reason."
-    },
-    monster: {
-        title: "The Deity - Scylla",
+        title: "The Witch and the Monster - Scylla",
         description: "A once-beautiful nymph of the sea, she was\n" +
             "turned into a terrible monster by Circe, a\n" +
             "powerful witch who was jealous of Scylla.\n" +
             "(Circe also turned Odysseus’ men into pigs\n" +
             "when they landed on her island)."
+    },
+    monster: {
+        title: "The Deity - Athena",
+        description: "A goddess of wisdom, war, handicraft\n" +
+            "and practical reason."
     },
 }
 
@@ -243,7 +243,7 @@ function TheMap({ pTransition, pVariants }) {
                         In order to learn the whole truth of a story, <br />
                     All perspectives must be considered, no voice denied.<br /><br />
                     Click on each character, and follow each journey,<br />
-                    To learn the whole story, have each voice aplified.</h1>
+                    To learn the whole story, have each voice amplified.</h1>
                 }
                 <br />
                 {!completed() && <div className="absolute top-full text-sm xl:text-lg 2xl:text-xl 3xl:text-2xl w-full flex justify-center items-center h-8 mt-4">

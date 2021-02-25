@@ -4,6 +4,12 @@
   src: url('./assets/fonts/Anaktoria.otf');
 }
 
+@font-face {
+  font-family: 'Sunday';
+  font-weight: 400;
+  src: url('./assets/fonts/Sunday.otf');
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -110,4 +116,27 @@
   right: 4%;
   top: 74%;
   bottom: 1%;
+}
+
+.credits {
+  top: 4%;
+  left: 4%;
+  right: 6%;
+  bottom: 7%;
+}
+
+.stroke-medium {
+  -webkit-text-stroke: 0.25px black;
+}
+
+.stroke-semibold {
+  -webkit-text-stroke: 0.5px black;
+}
+
+.stroke-bold {
+  -webkit-text-stroke: 1px black;
+}
+.stroke-bolder {
+  -webkit-text-stroke: 1.2px black;
+
 }

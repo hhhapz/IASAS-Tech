@@ -1,6 +1,5 @@
-import { motion, useReducedMotion } from 'framer-motion';
-import { func } from 'prop-types';
-import { React, useEffect, useRef, useState } from 'react'
+import { motion } from 'framer-motion';
+import { React, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import canvas from '../assets/images/credits/canvas.png'
 
@@ -38,7 +37,7 @@ function Credits({ pTransition, pVariants }) {
 
         <div className="relative z-10">
             <img src={canvas} className="max-w-screen max-h-screen pointer-events-none" alt="" />
-            <div className="absolute credits font-cursive" ref={container}>
+            <div className="absolute credits font-cursive text-center" ref={container}>
                 <div ref={titles}>
                     <h1 className="text-center text-3xl xl:text-4xl 2xl:text-5xl pt-2 xl:py-4">The Unheard</h1>
                     <ul className="list-reset flex text-lg xl:text-2xl 2xl:text-3xl justify-center">
@@ -57,7 +56,7 @@ function Credits({ pTransition, pVariants }) {
 
                 {page === "production" &&
                     <div>
-                        <h2 className="mt-6 2xl:mt-12 text-center font-sunday"><strong className="stroke-semibold">DIRECTED BY</strong> ERICA AND MIKE CALI</h2>
+                        <h2 className="mt-6 2xl:mt-6 text-center font-sunday"><strong className="stroke-semibold">DIRECTED BY</strong> ERICA AND MIKE CALI</h2>
                         <h2 className="mt-2 text-center font-sunday"><strong className="stroke-semibold">WRITTEN BY</strong> ERICA CALI</h2>
                         <div className="mt-4 xl:mt-6 2xl:mt-6 flex justify-center text-black text-sm xl:text-base font-sunday uppercase">
                             <div className="flex-col text-center stroke-medium w-48 xl:w-64 2xl:w-72">
@@ -94,7 +93,7 @@ function Credits({ pTransition, pVariants }) {
                     </div>}
 
                 {page === "cast1" &&
-                    <div className="mt-4 xl:mt-6 2xl:mt-6 flex justify-center text-black text-sm xl:text-base 2xl:text-lg font-sunday uppercase">
+                    <div className="mt-4 xl:mt-6 2xl:mt-16 flex justify-center text-black text-sm xl:text-base 2xl:text-lg font-sunday uppercase">
                         <div className="flex-col text-center stroke-medium w-48 xl:w-64 2xl:w-72">
                             <h3 className="stroke-bolder text-base xl:text-lg">Bloomberg Report</h3>
                             <h3 className="xl:mt-2 mt-1 stroke-bold">Newsreporter</h3>
@@ -141,7 +140,7 @@ function Credits({ pTransition, pVariants }) {
                     </div>}
 
                 {page === "cast2" &&
-                    <div className="mt-4 xl:mt-6 2xl:mt-6 flex justify-center text-black text-sm xl:text-base 2xl:text-lg font-sunday uppercase">
+                    <div className="mt-4 xl:mt-6 2xl:mt-16 flex justify-center text-black text-sm xl:text-base 2xl:text-lg font-sunday uppercase">
                         <div className="flex-col text-center stroke-medium w-48 xl:w-64 2xl:w-72">
                             <h3 className="stroke-bolder text-base xl:text-lg">The Faithful Wife</h3>
                             <h3 className="xl:mt-2 mt-1 stroke-bold">Telemachus</h3>
@@ -163,7 +162,7 @@ function Credits({ pTransition, pVariants }) {
                     </div>}
 
                 {page === "web" &&
-                    <div className="mt-4 xl:mt-6 2xl:mt-6 flex justify-center text-black text-sm xl:text-base font-sunday uppercase">
+                    <div className="mt-4 xl:mt-6 2xl:mt-16 flex justify-center text-black text-sm xl:text-base font-sunday uppercase">
                         <div className="flex-col text-center stroke-medium w-48 xl:w-64 2xl:w-72">
                             <h3 className="text-center stroke-bold">Web Design Director</h3>
                             <h3 className="">Marilou Anderson</h3>
@@ -181,8 +180,12 @@ function Credits({ pTransition, pVariants }) {
                             <h3 className="">Brianna P.</h3>
                         </div>
                     </div>}
-
             </div>
+        </div>
+
+
+        <div className="absolute left-0 top-0 p-4 z-10">
+            <a className="text-xl 2xl:text-2xl font-cursive underline text-white hover:text-gray-300 cursor-pointer" href="https://github.com/hhhapz/IASAS-Tech" target="_blank">Source Code</a>
         </div>
 
         <div className="absolute right-0  bottom-0 p-4 z-10">

@@ -16,30 +16,30 @@ import tiresias from './assets/images/map/colour/tiresias.png'
 
 const IDS = {
   first: {
-    id: "JBDISrTRDOk",
+    id: "oGIT6A6ciuI",
     next: "/map",
     back: "/",
     tv: true,
   },
   last: {
-    id: "dQw4w9WgXcQ",
+    id: "V1MKKxArJL0",
     next: "/credits",
     back: "/map",
     tv: true,
   },
 
   penelope: {
-    id: "Gs069dndIYk",
+    id: "-gUf-2GvBvQ",
     next: "/map/penelope",
     image: penelope
   },
   tiresias: {
-    id: "Rbm6GXllBiw",
-    next: "/map/tiresias",
+    id: "bWEVZD10X5U",
+    next: "/map/bWEVZD10X5U",
     image: tiresias
   },
   calypso: {
-    id: "fNFzfwLM72c",
+    id: "uNCyLn1zaPE",
     next: "/map/calypso",
     image: calypso
   },

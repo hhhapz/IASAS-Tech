@@ -29,6 +29,19 @@
 
     gtag('config', 'G-670KE77NMV');
   </script>
+  <style>
+    @font-face {
+      font-family: "Anaktoria";
+      font-weight: 400;
+      src: url("%PUBLIC_URL%/fonts/Anaktoria.otf")
+    }
+
+    @font-face {
+      font-family: "Sunday";
+      font-weight: 400;
+      src: url("%PUBLIC_URL%/fonts/Sunday.otf")
+    }
+  </style>
 </head>
 
 <body>
@@ -44,6 +57,10 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+  <div class="font_preload" style="opacity: 0">
+    <span style="font-family: 'Anaktoria', Arial, sans-serif;"></span>
+    <span style="font-family: 'Sunday', Arial, sans-serif;"></span>
+  </div>
 </body>
 
 </html>

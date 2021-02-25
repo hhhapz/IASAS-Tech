@@ -1,8 +1,18 @@
 import { motion } from 'framer-motion';
 import { React, useState, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
-import TV from '../assets/images/tv.png'
 import YouTube from 'react-youtube';
+
+import {
+    TV,
+
+    athenaBW, monsterBW, bothBW, penelopeBW, calypsoBW, tiresiasBW,
+    both, penelope, calypso, tiresias,
+
+    heartsBW, shocklinesBW, stringhorBW, stringverBW, waveBW,
+    hearts, shocklines, stringhor, stringver, wave,
+} from '../Images'
+
 
 // const INITIAL = 5000;
 const INITIAL = 1500;
@@ -17,8 +27,18 @@ function Player({ pTransition, pVariants, ids }) {
     useEffect(() => {
         if (!ids[type]) history.push("/")
 
-        setTimeout(() => {
-        }, INITIAL)
+        const preload = [
+            athenaBW, monsterBW, bothBW, penelopeBW, calypsoBW, tiresiasBW,
+            both, penelope, calypso, tiresias,
+
+            heartsBW, shocklinesBW, stringhorBW, stringverBW, waveBW,
+            hearts, shocklines, stringhor, stringver, wave]
+
+        // if (type === "first") preload.forEach((src) => {
+        //     const i = new Image()
+        //     i.src = src
+        // })
+
     }, [history, ids, type])
 
     const onReportReady = (data) => {
@@ -69,6 +89,7 @@ function Player({ pTransition, pVariants, ids }) {
                         width: "100%",
                         height: "100%",
                         playerVars: {
+                            controls: 0,
                             autoplay: 0,
                             enablejsapi: 1,
                         }
@@ -88,6 +109,7 @@ function Player({ pTransition, pVariants, ids }) {
                         width: "100%",
                         height: "100%",
                         playerVars: {
+                            controls: 0,
                             autoplay: 0,
                             enablejsapi: 1,
                         }

@@ -1,15 +1,3 @@
-@font-face {
-  font-family: 'Anaktoria';
-  font-weight: 400;
-  src: url('./assets/fonts/Anaktoria.otf');
-}
-
-@font-face {
-  font-family: 'Sunday';
-  font-weight: 400;
-  src: url('./assets/fonts/Sunday.otf');
-}
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

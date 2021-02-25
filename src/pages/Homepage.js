@@ -1,8 +1,13 @@
 import { motion } from 'framer-motion';
 import { React, useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
-import frame from '../assets/images/homepage/frame.gif'
 import { toast } from 'react-toastify'
+
+import {
+  frame,
+  greek1, greek2, greek3, greek4, greek5, greek6, greek7, greek8, greek9,
+  latin1, latin2, latin3, latin4, latin5, latin6, latin7, latin8, latin9,
+} from '../Images'
 
 const INITIAL = 4000;
 // const INITIAL = 0;
@@ -10,18 +15,16 @@ const BETWEEN = 300;
 const PULSE = 1000;
 const PROMPT = 15000;
 
-const greeks = [1, 2, 3, 4, 5, 6, 7, 8, 9].map(i => {
-  const src = require(`../assets/images/homepage/greek${i}.png`).default
+const greeks = [greek1, greek2, greek3, greek4, greek5, greek6, greek7, greek8, greek9,].map((src, i) => {
   new Image().src = src
   return {
     src: src,
-    delay: INITIAL + i * BETWEEN,
+    delay: INITIAL + (i + 1) * BETWEEN,
     initial: 1,
     animate: 0,
   }
 })
-const latins = [1, 2, 3, 4, 5, 6, 7, 8, 9].map(i => {
-  const src = require(`../assets/images/homepage/latin${i}.png`).default
+const latins = [latin1, latin2, latin3, latin4, latin5, latin6, latin7, latin8, latin9,].map((src, i) => {
   new Image().src = src
   return {
     src: src,

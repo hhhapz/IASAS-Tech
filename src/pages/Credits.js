@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { React, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import canvas from '../assets/images/credits/canvas.png'
+import { creditsCanvas } from '../Images'
 
 const pages = [
     {
@@ -36,7 +36,7 @@ function Credits({ pTransition, pVariants }) {
         className={`flex justify-center items-center bg-credits bg-center bg-cover h-full w-full`}>
 
         <div className="relative z-10">
-            <img src={canvas} className="max-w-screen max-h-screen pointer-events-none" alt="" />
+            <img src={creditsCanvas} className="max-w-screen max-h-screen pointer-events-none" alt="" />
             <div className="absolute credits font-cursive text-center" ref={container}>
                 <div ref={titles}>
                     <h1 className="text-center text-3xl xl:text-4xl 2xl:text-5xl pt-2 xl:py-4">The Unheard</h1>

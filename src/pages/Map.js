@@ -3,32 +3,17 @@ import { React, useState, useEffect } from 'react'
 import MouseTooltip from '../components/MouseTooltip'
 import { useHistory, useParams } from 'react-router-dom'
 
-import coin from '../assets/images/map/coin.png'
+import {
+    coin,
 
-import athenaBW from '../assets/images/map/mono/athena.png'
-import monsterBW from '../assets/images/map/mono/monster.png'
-import bothBW from '../assets/images/map/mono/athena_monster.png'
+    athenaBW, monsterBW, bothBW, penelopeBW, calypsoBW, tiresiasBW,
+    both, penelope, calypso, tiresias,
 
-import penelopeBW from '../assets/images/map/mono/penelope.png'
-import calypsoBW from '../assets/images/map/mono/calypso.png'
-import tiresiasBW from '../assets/images/map/mono/tiresias.png'
+    heartsBW, shocklinesBW, stringhorBW, stringverBW, waveBW,
+    hearts, shocklines, stringhor, stringver, wave,
 
-import both from '../assets/images/map/colour/both.png'
-import penelope from '../assets/images/map/colour/penelope.png'
-import calypso from '../assets/images/map/colour/calypso.png'
-import tiresias from '../assets/images/map/colour/tiresias.png'
-
-import heartsBW from '../assets/images/map/mono/hearts.png'
-import shocklinesBW from '../assets/images/map/mono/shocklines.png'
-import stringhorBW from '../assets/images/map/mono/stringhor.png'
-import stringverBW from '../assets/images/map/mono/stringver.png'
-import waveBW from '../assets/images/map/mono/wave.png'
-import hearts from '../assets/images/map/colour/hearts.png'
-import shocklines from '../assets/images/map/colour/shocklines.png'
-import stringhor from '../assets/images/map/colour/stringhor.png'
-import stringver from '../assets/images/map/colour/stringver.png'
-import wave from '../assets/images/map/colour/wave.png'
-
+    creditsBG, creditsCanvas,
+} from '../Images'
 
 // const INITIAL = 5000;
 const INITIAL = 1500;
@@ -112,6 +97,11 @@ function TheMap({ pTransition, pVariants }) {
     let { watched } = useParams()
 
     useEffect(() => {
+        const preload = [creditsCanvas, creditsBG]
+        preload.forEach((src) => {
+            const i = new Image()
+            i.src = src
+        })
 
         if (Object.keys(queryStorage()).length === 0) {
             updateStorage("penelope", "bw")

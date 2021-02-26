@@ -77,12 +77,13 @@ function Homepage({ pTransition, pVariants }) {
       }, BETWEEN * latins.length + PULSE);
 
       setCode(setTimeout(() => {
+        toast.dismiss()
         toast.dark("Click the title to continue!")
       }, PROMPT));
     }, INITIAL))
 
     return () => {
-      console.log("clear");
+      toast.dismiss()
       clearTimeout(timeout)
     }
   }, [setImages, setNext])

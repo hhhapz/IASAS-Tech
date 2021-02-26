@@ -63,7 +63,6 @@ function Player({ pTransition, pVariants, ids }) {
     const pollFinish = (data) => {
         const target = data.target
         const elapsed = target.getCurrentTime() / target.getDuration()
-        console.log(elapsed, continuing);
         if (elapsed < 0.98 || continuing) {
             return
         }
@@ -92,6 +91,7 @@ function Player({ pTransition, pVariants, ids }) {
                             controls: 0,
                             autoplay: 0,
                             enablejsapi: 1,
+                            rel: 0,
                         }
                     }}
                 />
@@ -112,6 +112,7 @@ function Player({ pTransition, pVariants, ids }) {
                             controls: 0,
                             autoplay: 0,
                             enablejsapi: 1,
+                            rel: 0,
                         }
                     }}
                 />

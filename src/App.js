@@ -10,20 +10,20 @@ import Player from './pages/Player';
 import Credits from './pages/Credits';
 
 import {
+  coin,
+
   homepage, frame,
 
   TV,
 
-  coin,
-
   bothBW, penelopeBW, calypsoBW, tiresiasBW,
   athena, monster, penelope, calypso, tiresias,
 
-  heartsBW, shocklinesBW, stringhorBW, stringverBW, waveBW,
-  hearts, shocklines, stringhor, stringver, wave,
+  stringhorBW, stringverBW, waveBW,
 
   creditsCanvas, creditsBG,
 } from './Images'
+import Mobile from './pages/Mobile';
 
 const IDS = {
   first: {
@@ -80,12 +80,35 @@ const pVariants = {
 }
 
 function App() {
+  const [mobile, setMobile] = useState(window.innerWidth < 1024)
   const [loading, setLoading] = useState(true)
   const location = useLocation()
 
+  const updateWidth = () => {
+    setMobile(window.innerWidth < 1024)
+  }
+
+  useEffect(() => {
+    window.addEventListener("resize", updateWidth)
+    return () => {
+      window.removeEventListener("resize", updateWidth)
+    }
+  }, [setMobile])
+
   useEffect(() => {
     const path = location.pathname
-    if (path.startsWith("/report") || path.startsWith("/video")) {
+
+    if (mobile) {
+      const sources = [homepage, athena, monster, tiresias, penelope, coin, calypso]
+      let count = sources.length
+      sources.forEach(src => {
+        const i = new Image()
+        i.src = src
+        i.onload = () => {
+          if (--count === 0) setLoading(false)
+        }
+      });
+    } else if (path.startsWith("/report") || path.startsWith("/video")) {
       const sources = [TV]
       let count = sources.length
       sources.forEach(src => {
@@ -126,17 +149,18 @@ function App() {
         }
       });
     }
-  }, [])
+  }, [mobile])
 
   return (
-    <div className="App bg-backdrop select-none w-screen h-screen overflow-hidden">
+    <div className={`App bg-backdrop select-none w-screen h-screen ${mobile ? "" : "overflow-hidden"}`}>
       {loading && <motion.div className="w-screen h-screen bg-backdrop flex justify-center items-center" pTransition={pTransition} pVariants={pVariants}>
         <svg className="animate-spin -ml-1 mr-3 w-1/12 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
         </svg>
       </motion.div>}
-      {!loading &&
+      {!loading && mobile && <Mobile pTransition={pTransition} position={pVariants} />}
+      {!loading && !mobile &&
         <AnimatePresence exitBeforeEnter>
           <Switch location={location} key={location.pathname}>
             <Route path="/credits" exact >
@@ -162,14 +186,16 @@ function App() {
             </Route>
           </Switch>
         </AnimatePresence>}
-      <ToastContainer
-        position="bottom-right"
-        autoClose={false}
-        newestOnTop={false}
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-      />
+
+      {!loading && !mobile &&
+        <ToastContainer
+          position="bottom-right"
+          autoClose={false}
+          newestOnTop={false}
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+        />}
     </div>
   );
 }

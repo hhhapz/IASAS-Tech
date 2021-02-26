@@ -126,5 +126,17 @@
 }
 .stroke-bolder {
   -webkit-text-stroke: 1.2px black;
+}
 
+.credits-title {
+  -webkit-text-stroke: 1.2px black;
+  @apply text-base xl:text-lg text-center;
+}
+
+.credits-subtitle {
+  @apply inline-block border-b-2 border-black text-sm mt-2; 
+}
+
+.credits-name {
+  @apply text-base;
 }

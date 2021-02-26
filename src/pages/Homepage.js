@@ -56,7 +56,7 @@ function Homepage({ pTransition, pVariants }) {
   useEffect(() => {
     setImages(greeks)
 
-    setTimeout(() => {
+    setCode(setTimeout(() => {
       const newImages = greeks.slice()
       setTransition(["strikethrough strikethrough-enable", "", "opacity-0"])
       latins.forEach((src, i) => {
@@ -79,13 +79,18 @@ function Homepage({ pTransition, pVariants }) {
       setCode(setTimeout(() => {
         toast.dark("Click the title to continue!")
       }, PROMPT));
-    }, INITIAL)
+    }, INITIAL))
+
+    return () => {
+      console.log("clear");
+      clearTimeout(timeout)
+    }
   }, [setImages, setNext])
 
 
   return <motion.div initial="out" animate="in" exit="out" variants={pVariants} transition={pTransition}
-
     className="h-screen w-screen bg-homepage bg-cover bg-center flex justify-center items-center">
+
     <div className="flex flex-col justify-between w-8/12 max-w-4xl">
       <span className="flex justify-center">
         <h2 className={`${TITLE2} font-cursive text-center mb-8 ${transition[0]}`}>The Odyssey, Book One, Chapter 2</h2>

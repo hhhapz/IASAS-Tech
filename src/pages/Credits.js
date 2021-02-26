@@ -63,14 +63,14 @@ function Credits({ pTransition, pVariants }) {
                                 <h3>Tiffany J.</h3>
 
                                 <h3 className="mt-4 stroke-bold">Video Editors</h3>
-                                <h3>Nicholas Pudjarmintao ('16)</h3>
+                                <h3>Nicholas Pudjarminta ('16)</h3>
                                 <h3>Deva R. '22</h3>
                             </div>
                             <div className="flex-col text-center stroke-medium mt-8 w-48 xl:w-64 2xl:w-72">
                                 <h3 className="stroke-bold">Costume Design</h3>
                                 <h3>Ulfa</h3>
                                 <h3>Hair and Makeup</h3>
-                                <h3>Francisukus Setiawan</h3>
+                                <h3>Franciskus Setiawan</h3>
                                 <h3 className="mt-4 stroke-bold">Lighting Design</h3>
                                 <h3>Yuni Adamsyah</h3>
                                 <h3>Mike Cali</h3>
@@ -137,7 +137,7 @@ function Credits({ pTransition, pVariants }) {
                             <div className="flex">
                                 <div className="mr-4">
                                     <h3 className="credits-subtitle">Vegas Showgirl Dancers</h3>
-                                    <h3 className="credits-name">Jisoo L., Kayla S.,</h3>
+                                    <h3 className="credits-name">Jisoo L., Kayla G.,</h3>
                                     <h3 className="credits-name">Dananya C., Kelly S.,</h3>
                                     <h3 className="credits-name">Abigail S.</h3>
                                     <h3 className="credits-subtitle">Callie</h3>
@@ -167,7 +167,7 @@ function Credits({ pTransition, pVariants }) {
 
                             <h3 className="credits-subtitle">Dance Sequence</h3>
                             <h3 className="text-center text-base">Ahreumbi R., Maura H.,</h3>
-                            <h3 className="text-center text-base">Kayla G., Dananya C.,</h3>
+                            <h3 className="text-center text-base">Kayla G., Danaya C.,</h3>
                             <h3 className="text-center text-base">Kelly S., Abigail S., Dain C.,</h3>
                             <h3 className="text-center text-base">Adjani A., Dain C.,</h3>
                             <h3 className="text-center text-base">Amanda N.</h3>

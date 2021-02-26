@@ -92,6 +92,7 @@ function Player({ pTransition, pVariants, ids }) {
                             autoplay: 0,
                             enablejsapi: 1,
                             rel: 0,
+                            modestbranding: 1,
                         }
                     }}
                 />
@@ -110,9 +111,11 @@ function Player({ pTransition, pVariants, ids }) {
                         height: "100%",
                         playerVars: {
                             controls: 0,
+
                             autoplay: 0,
                             enablejsapi: 1,
                             rel: 0,
+                            modestbranding: 1,
                         }
                     }}
                 />

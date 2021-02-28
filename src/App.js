@@ -91,7 +91,6 @@ function App() {
   const location = useLocation()
 
   const updateWidth = () => {
-    console.log(location.pathname);
     if (!document.fullscreenElement && !location.pathname.startsWith("/video") && !location.pathname.startsWith("/report")) {
       setMobile(window.innerWidth < MIN_WIDTH)
     }
@@ -161,6 +160,10 @@ function App() {
     }
   }, [mobile])
 
+  useEffect(() => {
+    console.log(location.pathname);
+  }, [location])
+
   const extra = mobile ? (scroll ? "overflow-x-hidden" : "overflow-hidden")
     : "overflow-hidden"
 
@@ -184,7 +187,7 @@ function App() {
               <MMap pTransition={pTransition} pVariants={pVariants} setScroll={setScroll} />
             </Route>
             <Route path="/map/:watched" exact >
-              <MMap pTransition={pTransition} pVariants={pVariants} />
+              <MMap pTransition={pTransition} pVariants={pVariants} setScroll={setScroll} />
             </Route>
             <Route path="/report/:type" exact >
               <MPlayer pTransition={pTransition} pVariants={pVariants} ids={IDS} />

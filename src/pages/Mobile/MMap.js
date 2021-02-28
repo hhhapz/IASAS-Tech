@@ -99,6 +99,7 @@ function MMap({ pTransition, pVariants, setScroll }) {
     }
 
     useEffect(() => {
+        setScroll(true)
         if (Object.keys(queryStorage()).length === 0) {
             updateStorage("penelope", "bw")
             updateStorage("tiresias", "bw")
@@ -138,8 +139,11 @@ function MMap({ pTransition, pVariants, setScroll }) {
         })
 
         window.addEventListener("scroll", runOnScroll, { passive: true })
-        return () => window.removeEventListener("scroll", runOnScroll)
-    }, [watched])
+        return () => {
+            window.removeEventListener("scroll", runOnScroll)
+            setScroll(true)
+        }
+    }, [watched, setScroll])
 
     const showVideo = (name) => {
         setModal(name)

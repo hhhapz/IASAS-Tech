@@ -4,20 +4,16 @@ import { useHistory, useParams } from 'react-router-dom'
 import YouTube from 'react-youtube';
 
 import {
-    TV,
+    TVCrop,
 
-    athenaBW, monsterBW, bothBW, penelopeBW, calypsoBW, tiresiasBW,
-    both, penelope, calypso, tiresias,
-
-    heartsBW, shocklinesBW, stringhorBW, stringverBW, waveBW,
-    hearts, shocklines, stringhor, stringver, wave,
-} from '../Images'
+    athena, monster, penelope, calypso, tiresias, coin, creditsFull
+} from '../../Images'
 
 
 // const INITIAL = 5000;
 const INITIAL = 1500;
 
-function Player({ pTransition, pVariants, ids }) {
+function MPlayer({ pTransition, pVariants, ids }) {
     const [continuing, setContinuing] = useState(false)
     const [data, setData] = useState(undefined)
     const history = useHistory()
@@ -25,19 +21,24 @@ function Player({ pTransition, pVariants, ids }) {
     let { id, next, back, tv, image } = ids[type]
 
     useEffect(() => {
-        if (!ids[type]) history.push("/")
+        if (!type || !ids[type]) history.push("/")
 
-        const preload = [
-            athenaBW, monsterBW, bothBW, penelopeBW, calypsoBW, tiresiasBW,
-            both, penelope, calypso, tiresias,
+        const preloadFirst = [athena, monster, penelope, calypso, tiresias, coin]
+        const preloadLast = [creditsFull]
 
-            heartsBW, shocklinesBW, stringhorBW, stringverBW, waveBW,
-            hearts, shocklines, stringhor, stringver, wave]
-
-        if (type === "first") preload.forEach((src) => {
+        if (type === "first") preloadFirst.forEach((src) => {
             const i = new Image()
             i.src = src
         })
+
+        if (type === "last") preloadLast.forEach((src) => {
+            const i = new Image()
+            i.src = src
+        })
+
+        window.scrollY = 0
+        document.body.scrollTop = 0
+        document.documentElement.scrollTop = 0
 
     }, [history, ids, type])
 
@@ -71,24 +72,23 @@ function Player({ pTransition, pVariants, ids }) {
     }
 
     return <motion.div initial="out" animate="in" exit="out" variants={pVariants} transition={pTransition}
-        className={`flex justify-center items-center bg-backdrop h-full w-full ${tv ? "ml-4" : ""}`}>
+        className={`flex justify-center items-center bg-backdrop w-full ${tv ? "my-32" : "my-20"}`}>
         {image &&
-            <img alt="" src={image} className="absolute top-0 right-0 h-2/6 pointer-events-none" />}
+            <img alt="" src={image} className="absolute bottom-0 right-0 h-2/6 pointer-events-none" />}
         {tv &&
             <div className="relative z-10">
-                <img src={TV} className="max-w-screen max-h-screen pointer-events-none" alt="" />
+                <img src={TVCrop} className="w-screen max-h-screen" alt="" />
                 <YouTube
                     videoId={id}
                     id="reportPlayer"
                     onReady={onReportReady}
                     onEnd={pollFinish}
                     onPause={pollFinish}
-                    containerClassName="absolute z-10 report-video"
+                    containerClassName="absolute z-10 m-report-video"
                     opts={{
                         width: "100%",
                         height: "100%",
                         playerVars: {
-                            controls: 0,
                             autoplay: 0,
                             enablejsapi: 1,
                             rel: 0,
@@ -98,19 +98,20 @@ function Player({ pTransition, pVariants, ids }) {
                 />
             </div>}
         {!tv &&
-            <div className="w-9/12 h-5/6 z-10">
+            <div className="relative z-10">
+                <img src={TVCrop} className="w-screen max-h-screen opacity-0" alt="" />
                 <YouTube
                     videoId={id}
                     id="reportPlayer"
                     onReady={onReportReady}
                     onEnd={pollFinish}
                     onPause={pollFinish}
-                    containerClassName="max-w-full z-10 h-full"
+                    containerClassName="absolute m-report-notv"
                     opts={{
                         width: "100%",
                         height: "100%",
                         playerVars: {
-                            controls: 0,
+                            controls: 1,
 
                             autoplay: 0,
                             enablejsapi: 1,
@@ -121,15 +122,15 @@ function Player({ pTransition, pVariants, ids }) {
                 />
             </div>}
         {skip &&
-            <div className="absolute right-0 bottom-0 p-4 hover:text-yellow-900 cursor-pointer z-20" onClick={skip}>
+            <div className="absolute right-0 top-0 p-4 hover:text-yellow-900 cursor-pointer z-20" onClick={skip}>
                 <h1 className="text-2xl xl:text-3xl 3xl:text-5xl font-cursive underline">Skip</h1>
             </div>}
         {back &&
-            <div className="absolute left-0  bottom-0 p-4 hover:text-yellow-900 cursor-pointer z-20" onClick={goBack}>
+            <div className="absolute left-0  top-0 p-4 hover:text-yellow-900 cursor-pointer z-20" onClick={goBack}>
                 <h1 className="text-2xl xl:text-3xl 3xl:text-5xl font-cursive underline">Go back</h1>
             </div>
         }
     </motion.div>
 }
 
-export default Player
+export default MPlayer

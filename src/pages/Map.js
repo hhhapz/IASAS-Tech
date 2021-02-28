@@ -14,6 +14,7 @@ import {
 
     creditsBG, creditsCanvas,
 } from '../Images'
+import CrossfadeImage from '../components/Crossfade';
 
 // const INITIAL = 5000;
 const INITIAL = 1500;
@@ -54,8 +55,6 @@ const titles = {
     },
 }
 
-
-
 const queryStorage = () => {
     let storage = window.localStorage["seen"]
     if (storage) return JSON.parse(storage)
@@ -68,7 +67,6 @@ const updateStorage = (name, value) => {
     }
 
     newStorage[name] = value
-    console.log(newStorage);
     window.localStorage["seen"] = JSON.stringify(newStorage)
 }
 
@@ -229,14 +227,14 @@ function TheMap({ pTransition, pVariants }) {
                     <h1 className="text-7xl font-cursive underline hover:text-yellow-900 cursor-pointer px-8"
                         onClick={goNext}>Continue</h1> :
 
-                    <h1 className="lg:text-xl xl:text-2xl 2xl:text-3xl 3xl:text-4xl text-center px-12">
+                    <h1 className="text-xl lg:text-2xl 2xl:text-3xl 3xl:text-4xl text-center px-12">
                         In order to learn the whole truth of a story, <br />
                     All perspectives must be considered, no voice denied.<br /><br />
                     Click on each character, and follow each journey,<br />
                     To learn the whole story, have each voice amplified.</h1>
                 }
                 <br />
-                {!completed() && <div className="absolute top-full text-sm xl:text-lg 2xl:text-xl 3xl:text-2xl w-full flex justify-center items-center h-8 mt-4">
+                {!completed() && <div className="absolute top-full lg:text-lg 2xl:text-xl 3xl:text-2xl w-full flex justify-center items-center h-8 mt-4">
                     <img className="h-8" src={coin} alt=""></img>
                     <h3 className="ml-2"> Watch all five stories on this page to reach the end of your journey.</h3>
                 </div>}
@@ -248,19 +246,24 @@ function TheMap({ pTransition, pVariants }) {
             <CornerImage athena={athenaBW} monster={monsterBW} both={both} none={bothBW} float data={cornerData("athena")} />
 
             <div className="absolute stringver pointer-events-none">
-                <img alt="" src={charData.penelope.type === "colour" ? stringver : stringverBW} className="max-h-full"></img>
+                <CrossfadeImage alt="" src={charData.penelope.type === "colour" ? stringver : stringverBW}
+                    style="max-h-full" containerClass="w-full h-full"></CrossfadeImage>
             </div>
             <div className="absolute stringhor pointer-events-none">
-                <img alt="" src={charData.tiresias.type === "colour" ? stringhor : stringhorBW} className="w-full h-full"></img>
+                <CrossfadeImage alt="" src={charData.tiresias.type === "colour" ? stringhor : stringhorBW}
+                    style="w-full h-full" containerClass="w-full h-full"></CrossfadeImage>
             </div>
             <div className="absolute hearts pointer-events-none">
-                <img alt="" src={charData.calypso.type === "colour" ? hearts : heartsBW} className="w-full h-full"></img>
+                <CrossfadeImage alt="" src={charData.calypso.type === "colour" ? hearts : heartsBW}
+                    style="w-full h-full" containerClass="w-full h-full"></CrossfadeImage>
             </div>
             <div className="absolute shocklines pointer-events-none">
-                <img alt="" src={charData.calypso.type === "colour" ? shocklines : shocklinesBW} className="w-full h-full"></img>
+                <CrossfadeImage alt="" src={charData.calypso.type === "colour" ? shocklines : shocklinesBW}
+                    style="w-full h-full" containerClass="w-full h-full"></CrossfadeImage>
             </div>
             <div className="absolute wave pointer-events-none">
-                <img alt="" src={["both", "athena"].includes(charData.athena.type) ? wave : waveBW} className="w-full h-full"></img>
+                <CrossfadeImage alt="" src={["both", "athena"].includes(charData.athena.type) ? wave : waveBW}
+                    style="w-full h-full" containerClass="w-full h-full"></CrossfadeImage>
             </div>
         </div>
         <MouseTooltip
@@ -284,8 +287,8 @@ function CornerImage({ data, ...types }) {
         onMouseLeave={onLeave}
         onClick={onClick}
         onMouseMove={data.mouseMove}>
-        <img alt="" src={types[charData.type]}
-            className={`max-h-full pointer-events-none ${types.float ? "float-right" : ""}`} />
+        <CrossfadeImage alt="" src={types[charData.type]} containerClass="w-full h-full"
+            style={`max-h-full pointer-events-none ${types.float ? "float-right" : ""}`} />
     </div>
 }
 

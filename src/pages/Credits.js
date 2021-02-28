@@ -20,6 +20,10 @@ const pages = [
         name: "web",
         title: "Web Team"
     },
+    {
+        name: "music",
+        title: "Music Used"
+    },
 ]
 function Credits({ pTransition, pVariants }) {
     const history = useHistory()

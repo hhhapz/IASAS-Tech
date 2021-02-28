@@ -1,7 +1,8 @@
 import ihomepage from './assets/images/homepage/backdrop.jpg'
-import iframe from './assets/images/homepage/frame.gif'
+import iframe from './assets/images/homepage/frame.png'
 
 import iTV from './assets/images/tv.png'
+import iTVCrop from './assets/images/tv-crop.png'
 
 import icoin from './assets/images/map/coin.png'
 
@@ -31,6 +32,7 @@ import iwave from './assets/images/map/colour/wave.png'
 
 import icreditsCanvas from './assets/images/credits/canvas.png'
 import icreditsBG from './assets/images/credits/credits.jpg'
+import icreditsFull from './assets/images/credits/credits-full.jpg'
 
 
 export const homepage = ihomepage
@@ -46,6 +48,7 @@ export const greek7 = require(`./assets/images/homepage/greek7.png`).default
 export const greek8 = require(`./assets/images/homepage/greek8.png`).default
 export const greek9 = require(`./assets/images/homepage/greek9.png`).default
 
+export const mlatin1 = require(`./assets/images/homepage/mlatin1.png`).default
 export const latin1 = require(`./assets/images/homepage/latin1.png`).default
 export const latin2 = require(`./assets/images/homepage/latin2.png`).default
 export const latin3 = require(`./assets/images/homepage/latin3.png`).default
@@ -57,6 +60,7 @@ export const latin8 = require(`./assets/images/homepage/latin8.png`).default
 export const latin9 = require(`./assets/images/homepage/latin9.png`).default
 
 export const TV = iTV
+export const TVCrop = iTVCrop
 
 export const coin = icoin
 export const athenaBW = iathenaBW
@@ -84,3 +88,4 @@ export const wave = iwave
 
 export const creditsCanvas = icreditsCanvas
 export const creditsBG = icreditsBG
+export const creditsFull = icreditsFull

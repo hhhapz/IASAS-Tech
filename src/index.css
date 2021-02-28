@@ -11,7 +11,7 @@
   left: 0;
   top: 50%;
   right: 100%;
-  border-top: 4px solid;
+  border-top: 2px solid;
   border-color: black;
   position: absolute;
 
@@ -22,6 +22,12 @@
   transform:rotate(-1deg);
 
   transition: right 3s;
+}
+
+@screen md {
+  .strikethrough:before {
+    border-top: 4px solid;
+  }
 }
 
 .strikethrough-enable:before {
@@ -35,13 +41,20 @@
 }
 
 .report-video {
-  top: 16.9%;
-  bottom: 13%;
-  left: 6.9%;
-  right: 23%;
+    top: 15.9%;
+    bottom: 12.9%;
+    left: 7%;
+    right: 23%;
 }
 
-.report-video.notv {
+.m-report-video {
+    top: 17.9%;
+    bottom: 7.3%;
+    left: 2%;
+    right: 14%;
+}
+
+.m-report-notv {
   top: 0%;
   bottom: 0%;
   left: 0%;
@@ -138,5 +151,5 @@
 }
 
 .credits-name {
-  @apply text-base;
+  @apply text-sm lg:text-base;
 }

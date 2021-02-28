@@ -35,8 +35,8 @@ const latins = [latin1, latin2, latin3, latin4, latin5, latin6, latin7, latin8, 
 })
 
 
-const TITLE1 = "2xl:text-6xl xl:text-5xl text-4xl"
-const TITLE2 = "2xl:text-5xl xl:text-4xl text-3xl"
+const TITLE1 = "2xl:text-6xl xl:text-5xl text-5xl"
+const TITLE2 = "2xl:text-5xl xl:text-4xl text-4xl"
 
 function Homepage({ pTransition, pVariants }) {
   const [images, setImages] = useState(greeks)
@@ -92,7 +92,7 @@ function Homepage({ pTransition, pVariants }) {
   return <motion.div initial="out" animate="in" exit="out" variants={pVariants} transition={pTransition}
     className="h-screen w-screen bg-homepage bg-cover bg-center flex justify-center items-center">
 
-    <div className="flex flex-col justify-between w-8/12 max-w-4xl">
+    <div className="flex flex-col justify-between w-10/12 lg:w-1/2 lg:max-w-3xl 2xl:w-8/12 2xl:max-w-4xl overflow-hidden">
       <span className="flex justify-center">
         <h2 className={`${TITLE2} font-cursive text-center mb-8 ${transition[0]}`}>The Odyssey, Book One, Chapter 2</h2>
       </span>

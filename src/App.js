@@ -21,19 +21,22 @@ import {
 
   stringhorBW, stringverBW, waveBW,
 
-  creditsCanvas, creditsBG,
+  creditsCanvas, creditsBG, TVCrop,
 } from './Images'
-import Mobile from './pages/Mobile';
+import MHomepage from './pages/Mobile/MHomepage';
+import MPlayer from './pages/Mobile/MPlayer';
+import MMap from './pages/Mobile/MMap';
+import MCredits from './pages/Mobile/MCredits';
 
 const IDS = {
   first: {
-    id: "oGIT6A6ciuI",
+    id: "SZhZwF054cE",
     next: "/map",
     back: "/",
     tv: true,
   },
   last: {
-    id: "V1MKKxArJL0",
+    id: "ghgknZocCjU",
     next: "/credits",
     back: "/map",
     tv: true,
@@ -79,13 +82,15 @@ const pVariants = {
   }
 }
 
+const MIN_WIDTH = 768
+
 function App() {
-  const [mobile, setMobile] = useState(window.innerWidth < 1024)
+  const [mobile, setMobile] = useState(window.innerWidth < MIN_WIDTH)
   const [loading, setLoading] = useState(true)
   const location = useLocation()
 
   const updateWidth = () => {
-    setMobile(window.innerWidth < 1024)
+    setMobile(window.innerWidth < MIN_WIDTH)
   }
 
   useEffect(() => {
@@ -99,15 +104,16 @@ function App() {
     const path = location.pathname
 
     if (mobile) {
-      const sources = [homepage, athena, monster, tiresias, penelope, coin, calypso]
-      let count = sources.length
+      const sources = [TVCrop, coin]
       sources.forEach(src => {
         const i = new Image()
         i.src = src
-        i.onload = () => {
-          if (--count === 0) setLoading(false)
-        }
-      });
+      })
+
+      setTimeout(() => {
+        setLoading(false)
+      }, 5000);
+
     } else if (path.startsWith("/report") || path.startsWith("/video")) {
       const sources = [TV]
       let count = sources.length
@@ -153,13 +159,57 @@ function App() {
 
   return (
     <div className={`App bg-backdrop select-none w-screen h-screen ${mobile ? "" : "overflow-hidden"}`}>
-      {loading && <motion.div className="w-screen h-screen bg-backdrop flex justify-center items-center" pTransition={pTransition} pVariants={pVariants}>
-        <svg className="animate-spin -ml-1 mr-3 w-1/12 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      {loading && <motion.div className="w-screen h-screen bg-backdrop flex flex-col justify-center items-center"
+        pTransition={pTransition} pVariants={pVariants}>
+        <svg className="animate-spin -ml-1 mr-3 w-1/6 md:w-1/12 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
         </svg>
+        {mobile && <h1 className="font-cursive mt-8 text-center text-lg">View this on a desktop<br></br>device for the full experience!</h1>}
       </motion.div>}
-      {!loading && mobile && <Mobile pTransition={pTransition} position={pVariants} />}
+      {!loading && mobile &&
+        <AnimatePresence exitBeforeEnter>
+          <Switch location={location} key={location.pathname}>
+            <Route path="/credits" exact >
+              <MCredits pTransition={pTransition} pVariants={pVariants} />
+            </Route>
+            <Route path="/map" exact >
+              <MMap pTransition={pTransition} pVariants={pVariants} />
+            </Route>
+            <Route path="/map/:watched" exact >
+              <MMap pTransition={pTransition} pVariants={pVariants} />
+            </Route>
+            <Route path="/report/:type" exact >
+              <MPlayer pTransition={pTransition} pVariants={pVariants} ids={IDS} />
+            </Route>
+            <Route path="/video/:type" exact >
+              <MPlayer pTransition={pTransition} pVariants={pVariants} ids={IDS} />
+            </Route>
+            <Route path="/" exact >
+              <MHomepage pTransition={pTransition} pVariants={pVariants} />
+              <ToastContainer
+                position={mobile ? "top-right" : "bottom-right"}
+                autoClose={false}
+                newestOnTop={false}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+              />
+            </Route>
+            <Route>
+              <MHomepage pTransition={pTransition} pVariants={pVariants} />
+              <ToastContainer
+                position={mobile ? "top-right" : "bottom-right"}
+                autoClose={false}
+                newestOnTop={false}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+              />
+            </Route>
+          </Switch>
+        </AnimatePresence>}
+
       {!loading && !mobile &&
         <AnimatePresence exitBeforeEnter>
           <Switch location={location} key={location.pathname}>
@@ -180,22 +230,29 @@ function App() {
             </Route>
             <Route path="/" exact >
               <Homepage pTransition={pTransition} pVariants={pVariants} />
+              <ToastContainer
+                position={mobile ? "top-right" : "bottom-right"}
+                autoClose={false}
+                newestOnTop={false}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+              />
             </Route>
             <Route>
               <Homepage pTransition={pTransition} pVariants={pVariants} />
+              <ToastContainer
+                position={mobile ? "top-right" : "bottom-right"}
+                autoClose={false}
+                newestOnTop={false}
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+              />
             </Route>
           </Switch>
         </AnimatePresence>}
 
-      {!loading && !mobile &&
-        <ToastContainer
-          position="bottom-right"
-          autoClose={false}
-          newestOnTop={false}
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-        />}
     </div>
   );
 }

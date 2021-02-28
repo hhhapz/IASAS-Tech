@@ -71,7 +71,7 @@ CrossfadeImage.propTypes = {
     duration: PropTypes.number,
     timingFunction: PropTypes.string,
     delay: PropTypes.number,
-    style: PropTypes.object,
+    style: PropTypes.string,
     containerClass: PropTypes.string,
 };
 

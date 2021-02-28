@@ -29,8 +29,8 @@ class MouseTooltip extends React.PureComponent {
 
     getTooltipPosition = ({ clientX: xPosition, clientY: yPosition }) => {
         this.setState({
-            xPosition,
-            yPosition,
+            xPosition: xPosition || 0,
+            yPosition: yPosition || 0,
             mouseMoved: true,
         });
     };

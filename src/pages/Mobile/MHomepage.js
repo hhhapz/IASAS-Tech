@@ -80,7 +80,7 @@ function MHomepage({ pTransition, pVariants }) {
                 setTransition(["strikethrough strikethrough-enable", "The Unheard",
                     "animate-pulse cursor-pointer hover:text-yellow-900", ""])
                 toast.dismiss()
-                toast.dark("Click the title to continue!")
+                toast.dark("Tap the title to continue!")
             }, PROMPT));
         }, INITIAL))
 
@@ -91,7 +91,8 @@ function MHomepage({ pTransition, pVariants }) {
     }, [setImages, setNext])
 
     return <motion.div initial="out" animate="in" exit="out" variants={pVariants} transition={pTransition}
-        className="min-h-screen bg-homepage bg-cover bg-center flex flex-col justify-center items-center text-black font-cursive">
+        className="w-screen min-h-screen bg-homepage bg-cover bg-center flex flex-col justify-center items-center
+            text-black font-cursive">
 
         <div className="flex flex-col justify-between overflow-hidden">
             <span className="flex justify-center">

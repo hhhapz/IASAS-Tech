@@ -1,6 +1,4 @@
 @tailwind base;
-@tailwind components;
-@tailwind utilities;
 
 .strikethrough {
   @apply relative;
@@ -93,11 +91,39 @@
 }
 
 .shocklines {
-  top: 0;
-  right: 0%;
-  left: 86%;
+  top: -1%;
+  right: 1%;
+  left: 84%;
   bottom: 84%
 }
+
+@screen lg {
+  .shocklines {
+    top: -1%;
+    right: 0%;
+    left: 85%;
+    bottom: 84%
+  }
+}
+
+@screen xl {
+  .shocklines {
+    top: -1%;
+    right: 1%;
+    left: 87%;
+    bottom: 84%
+  }
+}
+
+@screen 2xl {
+  .shocklines {
+    top: 0;
+    right: .5%;
+    left: 88%;
+    bottom: 84%
+  }
+}
+
 
 .stringhor {
   left: 10%;
@@ -142,9 +168,16 @@
 }
 
 .credits-title {
-  -webkit-text-stroke: 1.2px black;
+  -webkit-text-stroke: 1px black;
   @apply text-base xl:text-lg text-center;
 }
+
+@screen xl {
+  .credits-title {
+    -webkit-text-stroke: 1.2px black;
+    @apply text-base xl:text-lg text-center;
+  }
+} 
 
 .credits-subtitle {
   @apply inline-block border-b-2 border-black text-sm mt-2; 
@@ -153,3 +186,14 @@
 .credits-name {
   @apply text-sm lg:text-base;
 }
+
+.music-subtitle {
+  @apply inline-block border-b-2 border-black text-xs lg:text-sm xl:text-base mt-2; 
+}
+
+.music-name {
+  @apply text-xs lg:text-base mt-2; 
+}
+
+@tailwind components;
+@tailwind utilities;

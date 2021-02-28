@@ -90,7 +90,10 @@ function App() {
   const location = useLocation()
 
   const updateWidth = () => {
-    setMobile(window.innerWidth < MIN_WIDTH)
+    console.log(location.pathname);
+    if (!document.fullscreenElement && !location.pathname.startsWith("/video") && !location.pathname.startsWith("/report")) {
+      setMobile(window.innerWidth < MIN_WIDTH)
+    }
   }
 
   useEffect(() => {
@@ -158,7 +161,7 @@ function App() {
   }, [mobile])
 
   return (
-    <div className={`App bg-backdrop select-none w-screen h-screen ${mobile ? "" : "overflow-hidden"}`}>
+    <div className={`App bg-backdrop select-none w-screen h-screen ${mobile ? "overflow-x-hidden" : "overflow-hidden"}`}>
       {loading && <motion.div className="w-screen h-screen bg-backdrop flex flex-col justify-center items-center"
         pTransition={pTransition} pVariants={pVariants}>
         <svg className="animate-spin -ml-1 mr-3 w-1/6 md:w-1/12 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

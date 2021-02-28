@@ -72,7 +72,7 @@ function MPlayer({ pTransition, pVariants, ids }) {
     }
 
     return <motion.div initial="out" animate="in" exit="out" variants={pVariants} transition={pTransition}
-        className={`flex justify-center items-center bg-backdrop w-full ${tv ? "my-32" : "my-20"}`}>
+        className={`flex justify-center items-center bg-backdrop w-full overflow-hidden ${tv ? "my-32" : "my-20"}`}>
         {image &&
             <img alt="" src={image} className="absolute bottom-0 right-0 h-2/6 pointer-events-none" />}
         {tv &&

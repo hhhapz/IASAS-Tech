@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, useIsPresent } from 'framer-motion';
 import { React, useState, useEffect } from 'react'
 import MouseTooltip from '../components/MouseTooltip'
 import { useHistory, useParams } from 'react-router-dom'
@@ -78,6 +78,7 @@ const completed = () =>
 
 
 function TheMap({ pTransition, pVariants }) {
+    const [hover, setHover] = useState("")
     const [tooltip, setTooltip] = useState({
         text: "",
         show: false,
@@ -155,9 +156,6 @@ function TheMap({ pTransition, pVariants }) {
     }
 
     const onEnter = (name) => () => {
-        const newData = { ...charData }
-        if (name !== "athena") newData[name].type = "colour"
-        setCharData(newData)
     }
 
     const onLeave = (name) => () => {
@@ -166,16 +164,33 @@ function TheMap({ pTransition, pVariants }) {
         newData[name].type = queryStorage()[name]
 
         setCharData(newData)
+        setHover("")
     }
 
     const onClick = (name) => () => {
+        const touch = (window.matchMedia("(any-hover: none)").matches)
+
         if (name !== "athena") {
+            if (touch && hover !== name) {
+                setHover(name)
+                return
+            }
+
             history.push(`/video/${name}`)
             return
         }
 
-        if (charData[name].type === "athena") history.push(`/video/monster`)
-        else history.push(`/video/athena`)
+        if (touch && hover !== charData[name].type) {
+            setHover(charData[name].type)
+            return
+        }
+
+        if (charData[name].type === "athena") {
+            history.push(`/video/monster`)
+        }
+        else {
+            history.push(`/video/athena`)
+        }
     }
 
     const mouseMove = (name) => (e) => {
@@ -186,6 +201,11 @@ function TheMap({ pTransition, pVariants }) {
                 show: true,
                 side: name == "calypso" ? "left" : "right"
             })
+
+            const newData = { ...charData }
+            newData[name].type = "colour"
+            setCharData(newData)
+
             return
         }
         const newData = { ...charData }

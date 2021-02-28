@@ -86,6 +86,7 @@ const MIN_WIDTH = 768
 
 function App() {
   const [mobile, setMobile] = useState(window.innerWidth < MIN_WIDTH)
+  const [scroll, setScroll] = useState(true)
   const [loading, setLoading] = useState(true)
   const location = useLocation()
 
@@ -160,8 +161,11 @@ function App() {
     }
   }, [mobile])
 
+  const extra = mobile ? (scroll ? "overflow-x-hidden" : "overflow-hidden")
+    : "overflow-hidden"
+
   return (
-    <div className={`App bg-backdrop select-none w-screen h-screen ${mobile ? "overflow-x-hidden" : "overflow-hidden"}`}>
+    <div className={`App bg-backdrop select-none w-screen h-screen ${extra}`}>
       {loading && <motion.div className="w-screen h-screen bg-backdrop flex flex-col justify-center items-center"
         pTransition={pTransition} pVariants={pVariants}>
         <svg className="animate-spin -ml-1 mr-3 w-1/6 md:w-1/12 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -177,7 +181,7 @@ function App() {
               <MCredits pTransition={pTransition} pVariants={pVariants} />
             </Route>
             <Route path="/map" exact >
-              <MMap pTransition={pTransition} pVariants={pVariants} />
+              <MMap pTransition={pTransition} pVariants={pVariants} setScroll={setScroll} />
             </Route>
             <Route path="/map/:watched" exact >
               <MMap pTransition={pTransition} pVariants={pVariants} />

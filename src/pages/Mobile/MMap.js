@@ -77,7 +77,7 @@ const titles = {
     },
 }
 
-function MMap({ pTransition, pVariants }) {
+function MMap({ pTransition, pVariants, setScroll }) {
     const history = useHistory()
     let { watched } = useParams()
     const [top, setTop] = useState(0)
@@ -143,14 +143,16 @@ function MMap({ pTransition, pVariants }) {
 
     const showVideo = (name) => {
         setModal(name)
+        setScroll(false)
         setModalStyle("opacity-1")
     }
 
     const hideModal = () => {
         setModalStyle("opacity-0")
+        setScroll(true)
         setTimeout(() => {
             setModal("")
-            setModalStyle("-z-10 opacity-0")
+            setModalStyle("-z-10 opacity-0 hidden")
         }, 500);
     }
 

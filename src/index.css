@@ -72,7 +72,7 @@
 }
 
 .calypso {
-  top: 2%;
+  top: 0%;
   right: 2%;
   bottom: 62%
 }
@@ -89,41 +89,6 @@
   top: 33%;
   bottom: 51%;
 }
-
-.shocklines {
-  top: -1%;
-  right: 1%;
-  left: 84%;
-  bottom: 84%
-}
-
-@screen lg {
-  .shocklines {
-    top: -1%;
-    right: 0%;
-    left: 85%;
-    bottom: 84%
-  }
-}
-
-@screen xl {
-  .shocklines {
-    top: -1%;
-    right: 1%;
-    left: 87%;
-    bottom: 84%
-  }
-}
-
-@screen 2xl {
-  .shocklines {
-    top: 0;
-    right: .5%;
-    left: 88%;
-    bottom: 84%
-  }
-}
-
 
 .stringhor {
   left: 10%;

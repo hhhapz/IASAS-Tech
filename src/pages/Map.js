@@ -9,8 +9,8 @@ import {
     athenaBW, monsterBW, bothBW, penelopeBW, calypsoBW, tiresiasBW,
     both, penelope, calypso, tiresias,
 
-    heartsBW, shocklinesBW, stringhorBW, stringverBW, waveBW,
-    hearts, shocklines, stringhor, stringver, wave,
+    heartsBW, stringhorBW, stringverBW, waveBW,
+    hearts, stringhor, stringver, wave,
 
     creditsBG, creditsCanvas,
 } from '../Images'
@@ -275,10 +275,6 @@ function TheMap({ pTransition, pVariants }) {
             </div>
             <div className="absolute hearts pointer-events-none">
                 <CrossfadeImage alt="" src={charData.calypso.type === "colour" ? hearts : heartsBW}
-                    style="w-full h-full" containerClass="w-full h-full"></CrossfadeImage>
-            </div>
-            <div className="absolute shocklines pointer-events-none">
-                <CrossfadeImage alt="" src={charData.calypso.type === "colour" ? shocklines : shocklinesBW}
                     style="w-full h-full" containerClass="w-full h-full"></CrossfadeImage>
             </div>
             <div className="absolute wave pointer-events-none">

@@ -77,7 +77,7 @@ CrossfadeImage.propTypes = {
 
 CrossfadeImage.defaultProps = {
     duration: 1000,
-    timingFunction: "ease-in-out",
+    timingFunction: "linear",
     delay: 0,
     containerClass: "",
 };

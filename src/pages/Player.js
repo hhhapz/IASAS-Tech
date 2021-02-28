@@ -9,8 +9,8 @@ import {
     athenaBW, monsterBW, bothBW, penelopeBW, calypsoBW, tiresiasBW,
     both, penelope, calypso, tiresias,
 
-    heartsBW, shocklinesBW, stringhorBW, stringverBW, waveBW,
-    hearts, shocklines, stringhor, stringver, wave,
+    heartsBW, stringhorBW, stringverBW, waveBW,
+    hearts, stringhor, stringver, wave,
 } from '../Images'
 
 
@@ -31,8 +31,8 @@ function Player({ pTransition, pVariants, ids }) {
             athenaBW, monsterBW, bothBW, penelopeBW, calypsoBW, tiresiasBW,
             both, penelope, calypso, tiresias,
 
-            heartsBW, shocklinesBW, stringhorBW, stringverBW, waveBW,
-            hearts, shocklines, stringhor, stringver, wave]
+            heartsBW, stringhorBW, stringverBW, waveBW,
+            hearts, stringhor, stringver, wave]
 
         if (type === "first") preload.forEach((src) => {
             const i = new Image()

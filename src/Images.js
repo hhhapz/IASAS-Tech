@@ -20,12 +20,10 @@ import ipenelope from './assets/images/map/colour/penelope.png'
 import icalypso from './assets/images/map/colour/calypso.png'
 import itiresias from './assets/images/map/colour/tiresias.png'
 import iheartsBW from './assets/images/map/mono/hearts.png'
-import ishocklinesBW from './assets/images/map/mono/shocklines.png'
 import istringhorBW from './assets/images/map/mono/stringhor.png'
 import istringverBW from './assets/images/map/mono/stringver.png'
 import iwaveBW from './assets/images/map/mono/wave.png'
 import ihearts from './assets/images/map/colour/hearts.png'
-import ishocklines from './assets/images/map/colour/shocklines.png'
 import istringhor from './assets/images/map/colour/stringhor.png'
 import istringver from './assets/images/map/colour/stringver.png'
 import iwave from './assets/images/map/colour/wave.png'
@@ -76,12 +74,10 @@ export const penelope = ipenelope
 export const calypso = icalypso
 export const tiresias = itiresias
 export const heartsBW = iheartsBW
-export const shocklinesBW = ishocklinesBW
 export const stringhorBW = istringhorBW
 export const stringverBW = istringverBW
 export const waveBW = iwaveBW
 export const hearts = ihearts
-export const shocklines = ishocklines
 export const stringhor = istringhor
 export const stringver = istringver
 export const wave = iwave

@@ -136,62 +136,59 @@ function App() {
   useEffect(() => {
     const path = location.pathname
 
-    setTimeout(() => {
+    if (mobile) {
+      const sources = [TVCrop, coin, athena, monster, penelope, calypso, tiresias]
+      sources.forEach(src => {
+        const i = new Image()
+        i.src = src
+      })
 
-      if (mobile) {
-        const sources = [TVCrop, coin, athena, monster, penelope, calypso, tiresias]
-        sources.forEach(src => {
-          const i = new Image()
-          i.src = src
-        })
+      setTimeout(() => {
+        setLoading(false)
+      }, 3000);
 
-        setTimeout(() => {
-          setLoading(false)
-        }, 3000);
-
-      } else if (path.startsWith("/report") || path.startsWith("/video")) {
-        const sources = [TV]
-        let count = sources.length
-        sources.forEach(src => {
-          const i = new Image()
-          i.src = src
-          i.onload = () => {
-            if (--count === 0) setLoading(false)
-          }
-        });
-      } else if (path === "/map") {
-        const sources = [bothBW, calypsoBW, tiresiasBW, penelopeBW, stringhorBW, stringverBW, waveBW, TV,
-          athena, monster, calypso, penelope, tiresias]
-        let count = sources.length
-        sources.forEach(src => {
-          const i = new Image()
-          i.src = src
-          i.onload = () => {
-            if (--count === 0) setLoading(false)
-          }
-        });
-      } else if (path === "/credits") {
-        const sources = [creditsBG, creditsCanvas, TV]
-        let count = sources.length
-        sources.forEach(src => {
-          const i = new Image()
-          i.src = src
-          i.onload = () => {
-            if (--count === 0) setLoading(false)
-          }
-        });
-      } else {
-        const sources = [homepage, frame, TV]
-        let count = sources.length
-        sources.forEach(src => {
-          const i = new Image()
-          i.src = src
-          i.onload = () => {
-            if (--count === 0) setLoading(false)
-          }
-        });
-      }
-    }, 1500);
+    } else if (path.startsWith("/report") || path.startsWith("/video")) {
+      const sources = [TV]
+      let count = sources.length
+      sources.forEach(src => {
+        const i = new Image()
+        i.src = src
+        i.onload = () => {
+          if (--count === 0) setLoading(false)
+        }
+      });
+    } else if (path === "/map") {
+      const sources = [bothBW, calypsoBW, tiresiasBW, penelopeBW, stringhorBW, stringverBW, waveBW, TV,
+        athena, monster, calypso, penelope, tiresias]
+      let count = sources.length
+      sources.forEach(src => {
+        const i = new Image()
+        i.src = src
+        i.onload = () => {
+          if (--count === 0) setLoading(false)
+        }
+      });
+    } else if (path === "/credits") {
+      const sources = [creditsBG, creditsCanvas, TV]
+      let count = sources.length
+      sources.forEach(src => {
+        const i = new Image()
+        i.src = src
+        i.onload = () => {
+          if (--count === 0) setLoading(false)
+        }
+      });
+    } else {
+      const sources = [homepage, frame, TV]
+      let count = sources.length
+      sources.forEach(src => {
+        const i = new Image()
+        i.src = src
+        i.onload = () => {
+          if (--count === 0) setLoading(false)
+        }
+      });
+    }
   }, [mobile])
 
   useEffect(() => {

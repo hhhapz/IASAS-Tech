@@ -79,6 +79,7 @@ const completed = () =>
 
 function TheMap({ pTransition, pVariants }) {
     const [hover, setHover] = useState("")
+    const [arrows, setArrows] = useState(false)
     const [tooltip, setTooltip] = useState({
         text: "",
         show: false,
@@ -143,6 +144,12 @@ function TheMap({ pTransition, pVariants }) {
         setTimeout(() => {
         }, INITIAL)
     }, [setCharData, watched])
+
+    useEffect(() => {
+        setTimeout(() => {
+            setArrows(true)
+        }, 10000);
+    }, [setArrows])
 
     const goBack = () => {
         history.push("/report/first")
@@ -281,6 +288,36 @@ function TheMap({ pTransition, pVariants }) {
                 <CrossfadeImage alt="" src={["both", "athena"].includes(charData.athena.type) ? wave : waveBW}
                     style="w-full h-full" containerClass="w-full h-full"></CrossfadeImage>
             </div>
+            {arrows && queryStorage().penelope === "bw" && <div className="absolute arrow-penelope text-black">
+                <svg width="100%" height="100%" viewBox="0 0 20 20" fill="none" className="w-10 lg:w-14 h-14 animate-bounce"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M16.7071 10.2929C17.0976 10.6834 17.0976 11.3166 16.7071 11.7071L10.7071 17.7071C10.3166 18.0976 9.68342 18.0976 9.29289 17.7071L3.29289 11.7071C2.90237 11.3166 2.90237 10.6834 3.29289 10.2929C3.68342 9.90237 4.31658 9.90237 4.70711 10.2929L9 14.5858L9 3C9 2.44772 9.44772 2 10 2C10.5523 2 11 2.44772 11 3L11 14.5858L15.2929 10.2929C15.6834 9.90237 16.3166 9.90237 16.7071 10.2929Z" fill="currentColor" />
+                </svg>
+            </div>}
+            {arrows && queryStorage().tiresias === "bw" && <div className="absolute arrow-tiresias text-black">
+                <svg width="100%" height="100%" viewBox="0 0 20 20" fill="none" className="w-10 lg:w-14 h-14 animate-bounce"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M16.7071 10.2929C17.0976 10.6834 17.0976 11.3166 16.7071 11.7071L10.7071 17.7071C10.3166 18.0976 9.68342 18.0976 9.29289 17.7071L3.29289 11.7071C2.90237 11.3166 2.90237 10.6834 3.29289 10.2929C3.68342 9.90237 4.31658 9.90237 4.70711 10.2929L9 14.5858L9 3C9 2.44772 9.44772 2 10 2C10.5523 2 11 2.44772 11 3L11 14.5858L15.2929 10.2929C15.6834 9.90237 16.3166 9.90237 16.7071 10.2929Z" fill="currentColor" />
+                </svg>
+            </div>}
+            {arrows && queryStorage().calypso === "bw" && <div className="absolute arrow-calypso text-black">
+                <svg width="100%" height="100%" viewBox="0 0 20 20" fill="none" className="w-10 lg:w-14 h-14 animate-bounce"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M16.7071 10.2929C17.0976 10.6834 17.0976 11.3166 16.7071 11.7071L10.7071 17.7071C10.3166 18.0976 9.68342 18.0976 9.29289 17.7071L3.29289 11.7071C2.90237 11.3166 2.90237 10.6834 3.29289 10.2929C3.68342 9.90237 4.31658 9.90237 4.70711 10.2929L9 14.5858L9 3C9 2.44772 9.44772 2 10 2C10.5523 2 11 2.44772 11 3L11 14.5858L15.2929 10.2929C15.6834 9.90237 16.3166 9.90237 16.7071 10.2929Z" fill="currentColor" />
+                </svg>
+            </div>}
+            {arrows && ["athena", "none"].includes(queryStorage().athena) && <div className="absolute arrow-athena text-black">
+                <svg width="100%" height="100%" viewBox="0 0 20 20" fill="none" className="w-10 lg:w-14 h-14 animate-bounce"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M16.7071 10.2929C17.0976 10.6834 17.0976 11.3166 16.7071 11.7071L10.7071 17.7071C10.3166 18.0976 9.68342 18.0976 9.29289 17.7071L3.29289 11.7071C2.90237 11.3166 2.90237 10.6834 3.29289 10.2929C3.68342 9.90237 4.31658 9.90237 4.70711 10.2929L9 14.5858L9 3C9 2.44772 9.44772 2 10 2C10.5523 2 11 2.44772 11 3L11 14.5858L15.2929 10.2929C15.6834 9.90237 16.3166 9.90237 16.7071 10.2929Z" fill="currentColor" />
+                </svg>
+            </div>}
+            {arrows && ["monster", "none"].includes(queryStorage().athena) && <div className="absolute arrow-monster text-black">
+                <svg width="100%" height="100%" viewBox="0 0 20 20" fill="none" className="w-10 lg:w-14 h-14 animate-bounce"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M16.7071 10.2929C17.0976 10.6834 17.0976 11.3166 16.7071 11.7071L10.7071 17.7071C10.3166 18.0976 9.68342 18.0976 9.29289 17.7071L3.29289 11.7071C2.90237 11.3166 2.90237 10.6834 3.29289 10.2929C3.68342 9.90237 4.31658 9.90237 4.70711 10.2929L9 14.5858L9 3C9 2.44772 9.44772 2 10 2C10.5523 2 11 2.44772 11 3L11 14.5858L15.2929 10.2929C15.6834 9.90237 16.3166 9.90237 16.7071 10.2929Z" fill="currentColor" />
+                </svg>
+            </div>}
         </div>
         <MouseTooltip
             visibile={tooltip.show}
@@ -288,7 +325,7 @@ function TheMap({ pTransition, pVariants }) {
             offsetY={20}
             side={tooltip.side}
         >
-            <div className={`text-2xl font-cursive bg-black text-white py-1 px-2 rounded whitespace-nowrap ${tooltip.show ? "" : "hidden"}`}>
+            <div className={`text-2xl font-cursive bg-black bg-opacity-95 text-white py-1 px-2 rounded whitespace-nowrap ${tooltip.show ? "" : "hidden"}`}>
                 {tooltip.text}
                 <pre className="text-lg font-serif"><br />{tooltip.desc}</pre>
             </div>
@@ -303,7 +340,7 @@ function CornerImage({ data, ...types }) {
         onMouseLeave={onLeave}
         onClick={onClick}
         onMouseMove={data.mouseMove}>
-        <CrossfadeImage alt="" src={types[charData.type]} containerClass="w-full h-full"
+        <CrossfadeImage alt="" src={types[charData.type]} containerClass="w-full h-full flash"
             style={`max-h-full pointer-events-none ${types.float ? "float-right" : ""}`} />
     </div>
 }

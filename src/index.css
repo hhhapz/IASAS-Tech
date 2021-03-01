@@ -65,10 +65,22 @@
   bottom: 68%;
 }
 
+.arrow-penelope {
+  top: 28%;
+  left: 13%;
+  transform: rotate(135deg);
+}
+
 .tiresias {
   bottom: 2%;
   left: 0;
   top: 62%;
+}
+
+.arrow-tiresias {
+  top: 63%;
+  left: 9%;
+  transform: rotate(45deg);
 }
 
 .calypso {
@@ -77,10 +89,28 @@
   bottom: 62%
 }
 
+.arrow-calypso {
+  top: 28%;
+  right: 15%;
+  transform: rotate(-135deg);
+}
+
 .athena {
   bottom: 4%;
   right: 0%;
   top: 50%
+}
+
+.arrow-athena {
+  top: 50%;
+  right: 13%;
+  transform: rotate(-45deg);
+}
+
+.arrow-monster {
+  top: 73%;
+  right: 15%;
+  transform: rotate(-90deg);
 }
 
 .hearts {

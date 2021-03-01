@@ -36,10 +36,10 @@ export default class CrossfadeImage extends Component {
     render() {
         const { containerClass, duration, timingFunction, delay, style, src } = this.props;
         const { topSrc, bottomOpacity, bottomSrc } = this.state;
-
+        console.log(style);
         return (
-            <div className={containerClass} style={{ ...defaultStyle, ...{ position: "relative" } }}>
-                { src && <img style={{ ...defaultStyle }} src={src}></img>}
+            <div className={containerClass} >
+                { src && <img className={style} src={src}></img>}
                 {/* {!isSafari() && topSrc &&
                     <img
                         style={{ ...defaultStyle, ...{ position: "absolute" } }}

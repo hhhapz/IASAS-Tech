@@ -1,10 +1,15 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import Bowser from "bowser";
+
+const isSafari = () => Bowser.getParser(window.navigator.userAgent).getBrowserName() === "Safari"
+
 
 export default class CrossfadeImage extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            src: props.src,
             topSrc: props.src,
             bottomOpacity: 0,
             bottomSrc: props.src
@@ -14,15 +19,10 @@ export default class CrossfadeImage extends Component {
         const oldSrc = this.state.topSrc;
         const newSrc = newProps.src;
         if (newSrc !== oldSrc) {
-            // Reset the component everytime we receive new prop, to
-            // cancel out any animation that's still going on
             this.setState({ bottomSrc: false, topSrc: false }, () =>
                 this.setState(
-                    // Opacity less than 1 takes precendence in stacking order
                     { bottomSrc: oldSrc, topSrc: newSrc, bottomOpacity: 0.99 },
                     () => {
-                        // One of the few times setTimeout does wonders, this is for
-                        // getting fade out transition without css keyframe
                         if (!this.timeout) clearTimeout(this.timeout);
                         this.timeout = setTimeout(
                             () => this.setState({ bottomOpacity: 0 }),
@@ -34,18 +34,20 @@ export default class CrossfadeImage extends Component {
         }
     }
     render() {
-        const { containerClass, duration, timingFunction, delay, style } = this.props;
-
+        const { containerClass, duration, timingFunction, delay, style, src } = this.props;
         const { topSrc, bottomOpacity, bottomSrc } = this.state;
+
         return (
             <div className={containerClass} style={{ ...defaultStyle, ...{ position: "relative" } }}>
-                {topSrc &&
+                { src && <img style={{ ...defaultStyle }} src={src}></img>}
+                {/* {!isSafari() && topSrc &&
                     <img
                         style={{ ...defaultStyle, ...{ position: "absolute" } }}
                         src={topSrc} className={style}
                         alt=""
                     />}
-                {bottomSrc &&
+
+                {!isSafari() && bottomSrc &&
                     <img
                         style={{
                             ...defaultStyle,
@@ -57,7 +59,7 @@ export default class CrossfadeImage extends Component {
                         alt=""
                         src={bottomSrc}
                         className={style}
-                    />}
+                    />} */}
             </div>
         );
     }

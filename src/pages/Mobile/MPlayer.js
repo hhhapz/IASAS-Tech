@@ -72,7 +72,7 @@ function MPlayer({ pTransition, pVariants, ids }) {
     }
 
     return <motion.div initial="out" animate="in" exit="out" variants={pVariants} transition={pTransition}
-        className={`flex justify-center items-center bg-backdrop w-full overflow-hidden ${tv ? "my-32" : "my-20"}`}>
+        className={`flex justify-center items-center bg-backdrop w-full overflow-hidden ${tv ? "my-32" : "mb-32 mt-16"}`}>
         {image &&
             <img alt="" src={image} className="absolute bottom-0 right-0 h-2/6 pointer-events-none" />}
         {tv &&
@@ -99,14 +99,14 @@ function MPlayer({ pTransition, pVariants, ids }) {
             </div>}
         {!tv &&
             <div className="relative z-10">
-                <img src={TVCrop} className="w-screen max-h-screen opacity-0" alt="" />
+                <img src={TVCrop} className="w-screen max-h-screen max-w-lg md:max-w-2xl lg:max-w-3xl opacity-0" alt="" />
                 <YouTube
                     videoId={id}
                     id="reportPlayer"
                     onReady={onReportReady}
                     onEnd={pollFinish}
                     onPause={pollFinish}
-                    containerClassName="absolute m-report-notv"
+                    containerClassName="absolute m-report-notv py-2"
                     opts={{
                         width: "100%",
                         height: "100%",

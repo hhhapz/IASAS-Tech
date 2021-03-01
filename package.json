@@ -7,6 +7,7 @@
     "@craco/craco": "^6.1.0",
     "@tailwindcss/postcss7-compat": "^2.0.2",
     "autoprefixer": "^9.8.6",
+    "bowser": "^2.11.0",
     "framer-motion": "^3.6.2",
     "postcss": "^7.0.35",
     "prop-types": "^15.7.2",

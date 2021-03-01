@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import { motion, AnimatePresence } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 import { Route, Switch, useLocation } from 'react-router-dom'
@@ -27,6 +28,30 @@ import MHomepage from './pages/Mobile/MHomepage';
 import MPlayer from './pages/Mobile/MPlayer';
 import MMap from './pages/Mobile/MMap';
 import MCredits from './pages/Mobile/MCredits';
+
+
+const sendRequest = async (type, uuid) => {
+  const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+  const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
+  const details = {
+    width: vw,
+    height: vh,
+    type,
+    uuid
+  }
+  const formBody = Object
+    .keys(details)
+    .map((k) => `${encodeURIComponent(k)}=${encodeURIComponent(details[k])}`)
+    .join("&")
+  fetch("https://dev.teamortix.com/data", {
+    method: "post",
+    mode: "no-cors",
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: formBody
+  })
+}
 
 const IDS = {
   first: {
@@ -161,8 +186,17 @@ function App() {
   }, [mobile])
 
   useEffect(() => {
-    console.log(location.pathname);
+    const uuid = window.localStorage.getItem("uuid") || uuidv4()
+    window.localStorage.setItem("uuid", uuid)
+    sendRequest("visit", uuid)
+  }, [])
+
+  useEffect(() => {
+    const uuid = window.localStorage.getItem("uuid") || uuidv4()
+    window.localStorage.setItem("uuid", uuid)
+    sendRequest(location.pathname, uuid)
   }, [location])
+
 
   const extra = mobile ? (scroll ? "overflow-x-hidden" : "overflow-hidden")
     : "overflow-hidden"

@@ -44,7 +44,7 @@ const musicPages = [
         title: "The Seductress"
     },
     {
-        name: "penelop",
+        name: "penelope",
         title: "The Faithful Wife"
     },
 ]
@@ -202,23 +202,23 @@ function Credits({ pTransition, pVariants }) {
                             </div>
                         </div>}
 
-                    {musicPage === "penelop" &&
+                    {musicPage === "penelope" &&
                         <div className="mt-4 2xl:mt-16 flex justify-center text-black text-sm xl:text-base 2xl:text-lg font-sunday uppercase">
                             <div className="text-center stroke-medium w-60 lg:w-64 xl:w-72">
-                                <h3 className="lg:hidden music-subtitle mx-2">Home</h3>
+                                <h3 className="music-subtitle mx-2">Home</h3>
                                 <h3 className="music-name mx-2">Howard Shore</h3>
                                 <h3 className="music-name mx-2">Dave Eggar</h3>
                                 <h3 className="music-name">Pieces of a Woman</h3>
                                 <h3 className="music-name">UMG (on behalf of Decca Classics)</h3>
                             </div>
                             <div className="text-center stroke-medium w-60 lg:w-64 xl:w-72">
-                                <h3 className="lg:hidden music-subtitle mx-2">Brighter Dawn</h3>
+                                <h3 className="music-subtitle mx-2">Brighter Dawn</h3>
                                 <h3 className="music-name mx-2">Laura Mvula</h3>
                                 <h3 className="music-name mx-2">Pieces of a Woman</h3>
                                 <h3 className="music-name">2020 Flamingo Records Ltd.</h3>
                             </div>
                             <div className="text-center stroke-medium w-60 lg:w-64 xl:w-72">
-                                <h3 className="lg:hidden music-subtitle mx-2">Elizabeth</h3>
+                                <h3 className="music-subtitle mx-2">Elizabeth</h3>
                                 <h3 className="music-name mx-2">Howard Shore</h3>
                                 <h3 className="music-name mx-2">Dave Eggar</h3>
                                 <h3 className="music-name">Pieces of a Woman</h3>
